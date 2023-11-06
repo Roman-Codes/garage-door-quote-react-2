@@ -27,16 +27,11 @@ export const FormProvider = ({ children }) => {
         customerName: "",
         customerPhone: "",
         customerEmail: "",
-        widthFeetA: 0,
-        widthInchA: 0,
-        widthFeetB: 0,
-        widthInchB: 0,
-        heightFeetC: 0,
-        heightInchC: 0,
-        heightFeetD: 0,
-        heightInchD: 0,
-        heightFeetE: 0,
-        heightInchE: 0,
+        widthA: 0,
+        widthB: 0,
+        heightC: 0,
+        heightD: 0,
+        constantHeight: 300,
         manualOverride: "",
         controlUnit: "",
         slatProfile: "",
@@ -68,15 +63,14 @@ export const FormProvider = ({ children }) => {
             : type === "textarea" 
                 ? e.target.value.split(',') 
                 : e.target.value
-        console.log(name);
-        console.log(value);
+        
         setData(prevData => ({
             ...prevData,
             [name]: value
         }))
     }
 
-    const {extras, ...requiredInputs } = data
+    const {extras, heightC, heightD, widthA, widthB, ...requiredInputs } = data
 
     const canSubmit = [...Object.values(requiredInputs)].every(Boolean) && page === Object.keys(title).length - 1
     
@@ -88,12 +82,12 @@ export const FormProvider = ({ children }) => {
     const canNextPage2 = Object.keys(data)
         .filter(key => key.startsWith('width'))
         .map(key => data[key])
-        .every(Boolean)
+        .some(Boolean)
 
     const canNextPage3 = Object.keys(data)
         .filter(key => key.startsWith('height'))
         .map(key => data[key])
-        .every(Boolean)
+        .some(Boolean)
     
     const canNextPage4 = Object.keys(data)
         .filter(key => key.startsWith('manual'))

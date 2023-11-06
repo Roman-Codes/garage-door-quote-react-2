@@ -1,5 +1,4 @@
 import useFormContext from "../hooks/useFormContext"
-import  {generateMeasurementInputs} from "../utils/helpers"
 import {width} from "../assets/images/"
 
 const Width = () => {
@@ -12,7 +11,32 @@ const Width = () => {
                 <img src={width} />
             </div>
             <div className="measurement-inputs">
-                    {generateMeasurementInputs('width', data, handleChange)}
+                <div className="flex-col">
+                    <label htmlFor="widthA">A(mm):</label>
+                    <input
+                        type="number"
+                        id="widthA"
+                        name="widthA"
+                        placeholder="0"
+                        // pattern="([A-Z])[\w+.]{1,}"
+                        value={data.widthA}
+                        onChange={handleChange}
+                        disabled={data.widthB !== "0" && data.widthB}
+                    />
+                </div>
+                <div className="flex-col">
+                    <label htmlFor="widthB">B(mm):</label>
+                    <input
+                        type="number"
+                        id="widthB"
+                        name="widthB"
+                        placeholder="0"
+                        // pattern="([A-Z])[\w+.]{1,}"
+                        value={data.widthB}
+                        onChange={handleChange}
+                        disabled={data.widthA !== "0" && data.widthA}
+                    />
+                </div>
             </div>
         </div>
     )

@@ -25,8 +25,8 @@ import {exit8,
   width} from "../assets/images";
 
 const slatProfileMap = {
-  "slat55": pa_55,
-  "slat77": pa_77
+  "slat55": {image:pa_55, value: 55},
+  "slat77": {image:pa_77, value: 77}
 };
 
 const endslatMap = {
@@ -70,16 +70,10 @@ export const generateQuote = (data, measurements) => {
       customerName,
       customerPhone,
       customerEmail,
-      widthFeetA,
-      widthInchA,
-      widthFeetB,
-      widthInchB,
-      heightFeetC,
-      heightInchC,
-      heightFeetD,
-      heightInchD,
-      heightFeetE,
-      heightInchE,
+      widthA,
+      widthB,
+      heightC,
+      heightD,
       manualOverride,
       controlUnit,
       slatProfile,
@@ -97,8 +91,10 @@ export const generateQuote = (data, measurements) => {
       productPrice,
       productQuantity,
     } = data;
-    console.log(data);
+    console.log('runnign');
     const doc = new jsPDF("landscape");
+
+    const constantHeight = slatProfile === "slat55" ? 254 : 300;
 
     //Border
     doc.setLineWidth(0.2);
@@ -149,13 +145,15 @@ export const generateQuote = (data, measurements) => {
     doc.setFontSize(14);
     doc.text("1. Width:", 15, 45);
     doc.setFontSize(12);
-    doc.text([`A: ${convertToMetric(widthFeetA, widthInchA )}mm (${widthFeetA}'${widthInchA}")`, `B:  ${convertToMetric(widthFeetB, widthInchB )}mm (${widthFeetB}'${widthInchB}")`], 15,50);
+    console.log(widthB ? widthB : widthA + (2 * slatProfileMap[slatProfile].value));
+    console.log((2 * slatProfileMap[slatProfile].value));
+    doc.text([`A: ${widthA ? widthA : parseInt(widthB) - (2 * slatProfileMap[slatProfile].value)}mm`, `B:  ${widthB ? widthB : parseInt(widthA) + (2 * slatProfileMap[slatProfile].value)}mm`], 15,50);
     doc.addImage(width, "PNG", 15, 60, 55, 28);
     
     doc.setFontSize(14);
     doc.text("2. Height:", 15, 105);
     doc.setFontSize(12);
-    doc.text([`C: ${convertToMetric(heightFeetC, heightInchC )}mm (${heightFeetC}'${heightInchC}")`, `D: ${convertToMetric(heightFeetD, heightInchD )}mm (${heightFeetD}'${heightInchD}")`, `E: ${convertToMetric(heightFeetE, heightInchE )}mm (${heightFeetD}'${heightInchE}")`], 15,110);
+    doc.text([`C: ${heightC ? heightC : parseInt(heightD) + constantHeight}mm`, `D: ${heightD ? heightD : parseInt(heightC) + constantHeight}mm`, `E: ${constantHeight}mm`], 15,110);
     doc.addImage(height, "PNG", 15, 123, 55, 50);
     
     //Column 2
@@ -180,7 +178,7 @@ export const generateQuote = (data, measurements) => {
     // doc.addImage(`control${controlUnitSide},`, "JPEG", 97, 127, 35, 20);
     
     doc.text(`6. Slat Profile: ${'type'}`, 85, 152);
-    doc.addImage(slatProfileMap[slatProfile], "PNG", 98, 153, 27, 27);
+    doc.addImage(slatProfileMap[slatProfile].image, "PNG", 98, 153, 27, 27);
     //Column 3
     
     // doc.text(`6. Perforated: ${"YES/NO"}`, 155, 45);

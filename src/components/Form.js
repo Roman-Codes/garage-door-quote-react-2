@@ -22,8 +22,8 @@ const Form = () => {
     const handleNext = () => setPage(prev => prev + 1)
 
     const handleSubmit = e => {
-        e.preventDefault()
-        generateQuote(data)
+        e.preventDefault();
+        generateQuote(data);
     }
 
 
