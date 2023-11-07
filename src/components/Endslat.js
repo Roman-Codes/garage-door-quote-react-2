@@ -14,14 +14,14 @@ const Endslat = () => {
 
             <div className="split-container">
                 <div className="radio-container">
-                    <label htmlFor="ldgD">LGD&#8209;S</label>
+                    <label htmlFor="ldgS">LGD&#8209;S</label>
                     <input
                         type="radio"
                         id="ldgS"
                         name="endslat"
                         value={data.endslat}
                         onChange={handleChange}
-                        checked={data.endslat === 'ldgD'}
+                        checked={data.endslat === 'ldgS'}
                     />
                 </div>
                 <div className="radio-container">

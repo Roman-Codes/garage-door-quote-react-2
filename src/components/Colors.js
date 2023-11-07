@@ -7,12 +7,12 @@ const Colors = () => {
 
     const content = (
         <div className="flex-col">
-            <div className="split-container">
+            {/* <div className="split-container"> */}
                 {colorDropdown("Slat" ,'colorSlat', data.colorSlat, handleChange)}
                 {colorDropdown("Endslat",'colorEndslat', data.colorEndslat, handleChange)}
                 {colorDropdown("Box",'colorBox', data.colorBox, handleChange)}
                 {colorDropdown("Guiderail",'colorRail', data.colorRail, handleChange)}
-            </div>
+            {/* </div> */}
         </div>
     )
 

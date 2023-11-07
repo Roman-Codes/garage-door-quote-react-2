@@ -237,5 +237,5 @@ export const generateQuote = (data, measurements) => {
     doc.text("Approved for production:", 225, 189);
     doc.text("Sign: ________________", 225, 199);
     
-    doc.save();
+    doc.save('name.pdf');
 }

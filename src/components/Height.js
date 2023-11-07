@@ -33,19 +33,6 @@ const Height = () => {
                         disabled={data.heightC !== "0" && data.heightC}
                     />
                 </div>
-                {/* <div className="flex-col">
-                    <label htmlFor="constantHeight">E(mm):</label>
-                    <input
-                        type="number"
-                        id="constantHeight"
-                        name="constantHeight"
-                        placeholder="0"
-                        // pattern="([A-Z])[\w+.]{1,}"
-                        value={data.constantHeight}
-                        onChange={handleChange}
-                        disabled
-                    />
-                </div> */}
             </div>
         </div>
     )

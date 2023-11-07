@@ -149,6 +149,7 @@ ul {
 
 .price-container {
   display: flex;
+  flex-direction: column;
 }
 
 .radio-container { 
@@ -162,6 +163,7 @@ label {
 
 .width-image-container {
   width: 100%;
+  transform: scale(0.7); 
   display: flex;
   justify-content: center;
 }
@@ -173,4 +175,18 @@ label {
 
 .height-image {
   transform: scale(0.7)
+}
+
+.guiderail-image {
+  width: 50%;
+}
+
+.guiderail-container {
+  justify-content: flex-end;
+}
+
+@media only screen and (max-width: 400px) {
+  .width-image-container {
+    transform: scale(0.5); 
+   }
 }

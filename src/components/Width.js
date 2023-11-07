@@ -18,7 +18,6 @@ const Width = () => {
                         id="widthA"
                         name="widthA"
                         placeholder="0"
-                        // pattern="([A-Z])[\w+.]{1,}"
                         value={data.widthA}
                         onChange={handleChange}
                         disabled={data.widthB !== "0" && data.widthB}
@@ -31,7 +30,6 @@ const Width = () => {
                         id="widthB"
                         name="widthB"
                         placeholder="0"
-                        // pattern="([A-Z])[\w+.]{1,}"
                         value={data.widthB}
                         onChange={handleChange}
                         disabled={data.widthA !== "0" && data.widthA}
