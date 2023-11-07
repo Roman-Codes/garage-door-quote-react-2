@@ -25,8 +25,8 @@ import {exit8,
   width} from "../assets/images";
 
 const slatProfileMap = {
-  "slat55": {image:pa_55, value: 55},
-  "slat77": {image:pa_77, value: 77}
+  "slat55": pa_55,
+  "slat77": pa_77
 };
 
 const endslatMap = {
@@ -35,11 +35,11 @@ const endslatMap = {
 };
 
 const guiderailMap = {
-  "pp75": pp_75,
-  "pp66": pp_66,
-  "pp89": pp_89,
-  "pp110": pp_110
-};
+  "pp75": {img:pp_75, value: 75},
+  "pp66": {img:pp_66, value: 66},
+  "pp89": {img:pp_89, value: 89},
+  "pp110": {img:pp_110, value: 110}
+}
 
 const boxSizeMap = {
   "box250": boxSize250,
@@ -65,7 +65,7 @@ let CADollar = new Intl.NumberFormat('en-CA', {
   currency: 'CAD',
 });
 
-export const generateQuote = (data, measurements) => {
+export const generateQuote = (data) => {
     const {
       customerName,
       customerPhone,
@@ -91,7 +91,7 @@ export const generateQuote = (data, measurements) => {
       productPrice,
       productQuantity,
     } = data;
-    console.log('runnign');
+
     const doc = new jsPDF("landscape");
 
     const constantHeight = slatProfile === "slat55" ? 254 : 300;
@@ -120,11 +120,7 @@ export const generateQuote = (data, measurements) => {
     doc.setFontSize(16);
   
     doc.text("QUOTE FORM", 35, 15);
-    // var textField = new TextField();
-    // textField.Rect = [35, 20, 35, 5];
-    // textField.fieldName = "Date";
-    // textField.fieldName = "Date";
-    // textField.value= formatDate(new Date);
+  
     doc.text(formatDate(new Date()), 35, 22);
     
     doc.setFontSize(12);
@@ -134,7 +130,6 @@ export const generateQuote = (data, measurements) => {
     doc.text([customerPhone, customerEmail], 80, 15);
     
     doc.setFontSize(12);
-    // doc.text(["Office/Fax: (905) 532-0017", "Toll free: 1 (855)474-7657", "v.kz@rollpro.ca"], 160, 15);
     
     doc.setFontSize(12);
     doc.text(["RUF Roll Up Doors & Shutters", "10-1299 St Marys Ave", "Mississauga, ONL5E 1H9", "(647) 933-6677", "contact@rollupfactory.ca"], 230, 10);
@@ -145,9 +140,8 @@ export const generateQuote = (data, measurements) => {
     doc.setFontSize(14);
     doc.text("1. Width:", 15, 45);
     doc.setFontSize(12);
-    console.log(widthB ? widthB : widthA + (2 * slatProfileMap[slatProfile].value));
-    console.log((2 * slatProfileMap[slatProfile].value));
-    doc.text([`A: ${widthA ? widthA : parseInt(widthB) - (2 * slatProfileMap[slatProfile].value)}mm`, `B:  ${widthB ? widthB : parseInt(widthA) + (2 * slatProfileMap[slatProfile].value)}mm`], 15,50);
+
+    doc.text([`A: ${widthA ? widthA : parseInt(widthB) - (2 * guiderailMap[guiderail].value)}mm`, `B:  ${widthB ? widthB : parseInt(widthA) + (2 * guiderailMap[guiderail].value)}mm`], 15,50);
     doc.addImage(width, "PNG", 15, 60, 55, 28);
     
     doc.setFontSize(14);
@@ -171,23 +165,21 @@ export const generateQuote = (data, measurements) => {
 
     doc.setFontSize(14);
     doc.text("4. Manual Override:", 85, 90);
-    doc.addImage(manualOverride === 'front' ? overrideFront : overrideBack, "PNG", 100, 95, 20, 20);
+    doc.addImage(manualOverride === 'overrideFront' ? overrideFront : overrideBack, "PNG", 100, 95, 27, 20);
     
     doc.text("5. Control Unit Side:", 85, 120);
-    doc.addImage( (controlUnit === "left" ? controlLeft : controlRight), "JPEG", 97, 127, 27, 15);
-    // doc.addImage(`control${controlUnitSide},`, "JPEG", 97, 127, 35, 20);
+    doc.addImage( (controlUnit === "unitLeft" ? controlLeft : controlRight), "JPEG", 97, 127, 27, 15);
     
     doc.text(`6. Slat Profile: ${'type'}`, 85, 152);
-    doc.addImage(slatProfileMap[slatProfile].image, "PNG", 98, 153, 27, 27);
+    doc.addImage(slatProfileMap[slatProfile], "PNG", 98, 153, 27, 27);
     //Column 3
     
-    // doc.text(`6. Perforated: ${"YES/NO"}`, 155, 45);
     
     doc.text(`7. Endslat: ${'type'}`, 155, 45);
     doc.addImage(endslatMap[endslat], "PNG", 165, 47, 34, 34);
     
     doc.text(`8. Guide Rail: ${'type'}`, 155, 85);
-    doc.addImage(guiderailMap[guiderail], "PNG", 160, 86, 45, 20);
+    doc.addImage(guiderailMap[guiderail].img, "PNG", 160, 86, 45, 20);
     
     doc.text(`9. Box Size: ${'type'}`, 155, 110);
     doc.addImage(boxSizeMap[boxSize], "PNG", 172, 112, 25, 25);
@@ -212,9 +204,9 @@ export const generateQuote = (data, measurements) => {
     
     doc.setFontSize(14);
     doc.text("Extras:", 225, 113);
-    doc.setFontSize(12);
-    doc.rect(225, 115, 60, 25);
-    doc.text(extras, 227, 120);
+    doc.setFontSize(10);
+    doc.rect(225, 114, 60, 25);
+    doc.text(extras, 227, 117);
     
     doc.setFontSize(10);
     doc.text("According to UL325, the opening \ndevice for residential garage doors \n must have infrared sensors and a \nreverse mechanism such as \nphotocells and SNMC controllers.", 225, 145);

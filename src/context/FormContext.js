@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect } from "react"
+import { createContext, useState } from "react"
 
 const FormContext = createContext({})
 
@@ -61,7 +61,7 @@ export const FormProvider = ({ children }) => {
         const value = type === "radio"
             ? id
             : type === "textarea" 
-                ? e.target.value.split(',') 
+                ? e.target.value.split(', ') 
                 : e.target.value
         
         setData(prevData => ({
