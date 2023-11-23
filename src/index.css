@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Nunito&display=swap");
 
 * {
   margin: 0;
@@ -32,16 +32,23 @@
   width: 100%;
 }
 
+.flex-row {
+  display: flex;
+  flex-flow: row nowrap;
+  gap: 0.35rem;
+  width: 100%;
+  margin-bottom: 0.35rem;
+}
+
 input:invalid {
   outline: 2px solid red;
   background-color: rgb(255, 255, 139);
 }
 
-
 /* || GENERAL STYLES */
 
 body {
-  font-family: 'Nunito', sans-serif;
+  font-family: "Nunito", sans-serif;
   min-height: 100vh;
   background: radial-gradient(skyblue, darkblue);
   padding: 1rem;
@@ -152,29 +159,29 @@ ul {
   flex-direction: column;
 }
 
-.radio-container { 
+.radio-container {
   display: flex;
   align-items: center;
 }
 
-label { 
-  margin:5px 10px
+label {
+  margin: 5px 10px;
 }
 
 .width-image-container {
   width: 100%;
-  transform: scale(0.7); 
+  transform: scale(0.7);
   display: flex;
   justify-content: center;
 }
 
 .form-image {
   width: 130px;
-  height: 100px;;
+  height: 100px;
 }
 
 .height-image {
-  transform: scale(0.7)
+  transform: scale(0.7);
 }
 
 .guiderail-image {
@@ -187,6 +194,6 @@ label {
 
 @media only screen and (max-width: 400px) {
   .width-image-container {
-    transform: scale(0.5); 
-   }
+    transform: scale(0.5);
+  }
 }
