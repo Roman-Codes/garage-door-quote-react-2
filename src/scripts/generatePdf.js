@@ -27,25 +27,25 @@ import {
 } from "../assets/images";
 
 const slatProfileMap = {
-  slat55: pa_55,
-  slat77: pa_77,
+  slat55: { image: pa_55, name: "PA55" },
+  slat77: { image: pa_77, name: "PA77" },
 };
 
 const endslatMap = {
-  ldgS: ldg_s,
-  ldgD: ldg_d,
+  ldgS: { image: ldg_s, name: "LDG-S" },
+  ldgD: { image: ldg_d, name: "LDG-D" },
 };
 
 const guiderailMap = {
-  pp75: { img: pp_75, value: 75 },
-  pp66: { img: pp_66, value: 66 },
-  pp89: { img: pp_89, value: 89 },
-  pp110: { img: pp_110, value: 110 },
+  pp75: { img: pp_75, value: 75, namge: "PP75" },
+  pp66: { img: pp_66, value: 66, namge: "PP66" },
+  pp89: { img: pp_89, value: 89, namge: "PP89" },
+  pp110: { img: pp_110, value: 110, namge: "PP110" },
 };
 
 const boxSizeMap = {
-  box250: boxSize250,
-  box300: boxSize300,
+  box250: { image: boxSize250, name: "SK250" },
+  box300: { image: boxSize300, name: "SK300" },
 };
 
 const exitPositionMap = {
@@ -102,10 +102,10 @@ export const generateQuote = (data) => {
 
   const doc = new jsPDF("landscape");
 
-  const constantHeightE = slatProfile === "slat55" ? 254 : 300;
+  const constantHeightE = slatProfile === "slat55" ? 254 : 302;
 
   const constantHeightH = 105;
-  console.log(typeof heightC);
+
   let metricComputedHeightC;
   let metricComputedHeightD;
   let metricComputedHeightE;
@@ -276,18 +276,18 @@ export const generateQuote = (data) => {
     15
   );
 
-  doc.text(`6. Slat Profile: ${"type"}`, 85, 152);
-  doc.addImage(slatProfileMap[slatProfile], "PNG", 98, 153, 27, 27);
+  doc.text(`6. Slat Profile: ${slatProfileMap[slatProfile].name}`, 85, 152);
+  doc.addImage(slatProfileMap[slatProfile].image, "PNG", 98, 153, 27, 27);
   //Column 3
 
-  doc.text(`7. Endslat: ${"type"}`, 155, 45);
-  doc.addImage(endslatMap[endslat], "PNG", 165, 47, 34, 34);
+  doc.text(`7. Endslat: ${endslatMap[endslat].name}`, 155, 45);
+  doc.addImage(endslatMap[endslat].image, "PNG", 165, 47, 34, 34);
 
   doc.text(`8. Guide Rail: ${"type"}`, 155, 85);
   doc.addImage(guiderailMap[guiderail].img, "PNG", 160, 86, 45, 20);
 
-  doc.text(`9. Box Size: ${"type"}`, 155, 110);
-  doc.addImage(boxSizeMap[boxSize], "PNG", 172, 112, 25, 25);
+  doc.text(`9. Box Size: ${boxSizeMap[boxSize].name}`, 155, 110);
+  doc.addImage(boxSizeMap[boxSize].image, "PNG", 172, 112, 25, 25);
 
   doc.text(`10. Exit Strap/ Wire Position`, 155, 140);
   doc.addImage(exitPositionMap[exitStrap], "PNG", 165, 141, 33, 27);

@@ -1,9 +1,8 @@
 import useFormContext from "../hooks/useFormContext";
-import { colorDropdown } from "../utils/helpers";
 
 const Price = () => {
   const { data, handleChange } = useFormContext();
-  console.log(data);
+
   const content = (
     <div className="flex-col">
       <div className="price-container">
