@@ -1,11 +1,11 @@
 {
   "files": {
-    "main.css": "/garage-door-quote-react-2/static/css/main.3efee84f.css",
-    "main.js": "/garage-door-quote-react-2/static/js/main.632bf326.js",
+    "main.css": "/garage-door-quote-react-2/static/css/main.a24b857d.css",
+    "main.js": "/garage-door-quote-react-2/static/js/main.bd61cfa9.js",
     "static/js/498.bbd91a2a.chunk.js": "/garage-door-quote-react-2/static/js/498.bbd91a2a.chunk.js",
     "static/js/703.1f2db080.chunk.js": "/garage-door-quote-react-2/static/js/703.1f2db080.chunk.js",
     "static/js/573.b3c040e2.chunk.js": "/garage-door-quote-react-2/static/js/573.b3c040e2.chunk.js",
-    "static/media/height.png": "/garage-door-quote-react-2/static/media/height.34e7f6ef7695fb821a1a.png",
+    "static/media/height.png": "/garage-door-quote-react-2/static/media/height.1adb015286e8c42150e5.png",
     "static/media/motor.png": "/garage-door-quote-react-2/static/media/motor.5573e29eac55332c3104.png",
     "static/media/width.png": "/garage-door-quote-react-2/static/media/width.b4d98b4594e0f382d065.png",
     "static/media/pa_77.png": "/garage-door-quote-react-2/static/media/pa_77.358fbb43db6ccda99ada.png",
@@ -25,14 +25,14 @@
     "static/media/controlRight.png": "/garage-door-quote-react-2/static/media/controlRight.c17c7f9a4f9964a7b376.png",
     "static/media/drillingSide.png": "/garage-door-quote-react-2/static/media/drillingSide.81a4e97d4e6af12e6c18.png",
     "index.html": "/garage-door-quote-react-2/index.html",
-    "main.3efee84f.css.map": "/garage-door-quote-react-2/static/css/main.3efee84f.css.map",
-    "main.632bf326.js.map": "/garage-door-quote-react-2/static/js/main.632bf326.js.map",
+    "main.a24b857d.css.map": "/garage-door-quote-react-2/static/css/main.a24b857d.css.map",
+    "main.bd61cfa9.js.map": "/garage-door-quote-react-2/static/js/main.bd61cfa9.js.map",
     "498.bbd91a2a.chunk.js.map": "/garage-door-quote-react-2/static/js/498.bbd91a2a.chunk.js.map",
     "703.1f2db080.chunk.js.map": "/garage-door-quote-react-2/static/js/703.1f2db080.chunk.js.map",
     "573.b3c040e2.chunk.js.map": "/garage-door-quote-react-2/static/js/573.b3c040e2.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.3efee84f.css",
-    "static/js/main.632bf326.js"
+    "static/css/main.a24b857d.css",
+    "static/js/main.bd61cfa9.js"
   ]
 }
