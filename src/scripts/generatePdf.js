@@ -75,13 +75,16 @@ export const generateQuote = (data) => {
     customerName,
     customerPhone,
     customerEmail,
+    measureTypeWidth,
     widthA,
+    fractionA,
     widthB,
-    heightView,
+    fractionB,
+    measureTypeHeight,
     heightC,
-    heightCFraction,
+    fractionC,
     heightD,
-    heightDFraction,
+    fractionD,
     manualOverride,
     controlUnit,
     slatProfile,
@@ -106,6 +109,46 @@ export const generateQuote = (data) => {
 
   const constantHeightH = 105;
 
+  let metricComputedWidthA;
+  let metricComputedWidthB;
+
+  let impComputedWidthA;
+  let impComputedWidthB;
+
+  if (measureTypeWidth === "metric") {
+    metricComputedWidthA = widthA
+      ? widthA
+      : parseInt(widthB) - 2 * guiderailMap[guiderail].value;
+
+    impComputedWidthA = convertToImperial(metricComputedWidthA);
+
+    metricComputedWidthB = widthB
+      ? widthB
+      : parseInt(widthA) + 2 * guiderailMap[guiderail].value;
+
+    impComputedWidthB = convertToImperial(metricComputedWidthB);
+  } else {
+    impComputedWidthA = widthA
+      ? widthA + fractionA
+      : (
+          parseInt(widthB) +
+          parseInt(fractionB) -
+          2 * convertToImperial(guiderailMap[guiderail].value)
+        ).toFixed(3);
+
+    metricComputedWidthA = convertToMetric(impComputedWidthA);
+
+    impComputedWidthB = widthB
+      ? widthB + fractionB
+      : (
+          parseInt(widthA) +
+          parseInt(fractionA) +
+          2 * convertToImperial(guiderailMap[guiderail].value)
+        ).toFixed(3);
+
+    metricComputedWidthB = convertToMetric(impComputedWidthB);
+  }
+
   let metricComputedHeightC;
   let metricComputedHeightD;
   let metricComputedHeightE;
@@ -116,7 +159,7 @@ export const generateQuote = (data) => {
   let impComputedHeightE;
   let impComputedHeightH;
 
-  if (heightView === "metric") {
+  if (measureTypeHeight === "metric") {
     metricComputedHeightC = parseInt(
       heightC ? heightC : parseInt(heightD) + constantHeightE
     );
@@ -141,14 +184,22 @@ export const generateQuote = (data) => {
     metricComputedHeightE = constantHeightE;
 
     impComputedHeightC = heightC
-      ? parseInt(heightC) + parseFloat(heightCFraction)
-      : parseInt(heightD) + parseFloat(heightDFraction) + impComputedHeightE;
+      ? parseInt(heightC) + parseFloat(fractionC)
+      : (
+          parseInt(heightD) +
+          parseFloat(fractionD) +
+          impComputedHeightE
+        ).toFixed(3);
 
     metricComputedHeightC = convertToMetric(impComputedHeightC);
 
     impComputedHeightD = heightD
-      ? parseInt(heightD) + parseFloat(heightDFraction)
-      : parseInt(heightC) + parseFloat(heightCFraction) - impComputedHeightE;
+      ? parseInt(heightD) + parseFloat(fractionD)
+      : (
+          parseInt(heightC) +
+          parseFloat(fractionC) -
+          impComputedHeightE
+        ).toFixed(3);
 
     metricComputedHeightD = convertToMetric(impComputedHeightD);
 
@@ -215,12 +266,8 @@ export const generateQuote = (data) => {
 
   doc.text(
     [
-      `A: ${
-        widthA ? widthA : parseInt(widthB) - 2 * guiderailMap[guiderail].value
-      }mm`,
-      `B:  ${
-        widthB ? widthB : parseInt(widthA) + 2 * guiderailMap[guiderail].value
-      }mm`,
+      `A: ${metricComputedWidthA}mm (${impComputedWidthA})"`,
+      `B: ${metricComputedWidthB}mm (${impComputedWidthB})"`,
     ],
     15,
     50

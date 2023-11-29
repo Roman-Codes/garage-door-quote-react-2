@@ -26,13 +26,16 @@ export const FormProvider = ({ children }) => {
     customerName: "",
     customerPhone: "",
     customerEmail: "",
+    measureTypeWidth: "metric",
     widthA: "",
+    fractionA: 0,
     widthB: "",
-    heightView: "metric",
+    fractionB: 0,
+    measureTypeHeight: "metric",
     heightC: "",
-    heightCFraction: "",
+    fractionC: 0,
     heightD: "",
-    heightDFraction: "",
+    fractionD: 0,
     constantHeight: 300,
     manualOverride: "",
     controlUnit: "",
@@ -54,7 +57,7 @@ export const FormProvider = ({ children }) => {
 
   const handleChange = (e) => {
     const type = e.target.type;
-
+    e.preventDefault();
     const name = e.target.name;
 
     const id = e.target.id;
@@ -78,16 +81,16 @@ export const FormProvider = ({ children }) => {
     heightD,
     widthA,
     widthB,
-    heightCFraction,
-    heightDFraction,
+    fractionA,
+    fractionB,
+    fractionC,
+    fractionD,
     ...requiredInputs
   } = data;
 
   const canSubmit =
     [...Object.values(requiredInputs)].every(Boolean) &&
     page === Object.keys(title).length - 1;
-
-  console.log(canSubmit);
 
   const canNextPage1 = Object.keys(data)
     .filter((key) => key.startsWith("customer"))

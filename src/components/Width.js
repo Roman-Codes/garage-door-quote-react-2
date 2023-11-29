@@ -1,44 +1,125 @@
-import useFormContext from "../hooks/useFormContext"
-import {width} from "../assets/images/"
+import useFormContext from "../hooks/useFormContext";
+import { width } from "../assets/images/";
 
 const Width = () => {
+  const { data, handleChange } = useFormContext();
 
-    const { data, handleChange } = useFormContext()
-
-    const content = (
-        <div className="flex-col">
-            <div className="width-image-container">
-                <img src={width} />
-            </div>
-            <div className="measurement-inputs">
-                <div className="flex-col">
-                    <label htmlFor="widthA">A(mm):</label>
-                    <input
-                        type="number"
-                        id="widthA"
-                        name="widthA"
-                        placeholder="0"
-                        value={data.widthA}
-                        onChange={handleChange}
-                        disabled={data.widthB !== "0" && data.widthB}
-                    />
-                </div>
-                <div className="flex-col">
-                    <label htmlFor="widthB">B(mm):</label>
-                    <input
-                        type="number"
-                        id="widthB"
-                        name="widthB"
-                        placeholder="0"
-                        value={data.widthB}
-                        onChange={handleChange}
-                        disabled={data.widthA !== "0" && data.widthA}
-                    />
-                </div>
-            </div>
+  const form =
+    data.measureTypeWidth === "metric" ? (
+      <div className="flex-col">
+        <div className="width-image-container">
+          <img src={width} />
         </div>
-    )
+        <div className="measurement-inputs">
+          <div className="flex-col">
+            <label htmlFor="widthA">C(mm):</label>
+            <input
+              type="number"
+              id="widthA"
+              name="widthA"
+              placeholder="0"
+              value={data.widthA}
+              onChange={handleChange}
+              disabled={data.widthB !== "0" && data.widthB}
+            />
+          </div>
+          <div className="flex-col">
+            <label htmlFor="widthB">D(mm):</label>
+            <input
+              type="number"
+              id="widthB"
+              name="widthB"
+              placeholder="0"
+              value={data.widthB}
+              onChange={handleChange}
+              disabled={data.widthA !== "0" && data.widthA}
+            />
+          </div>
+        </div>
+      </div>
+    ) : (
+      <div className="flex-col">
+        <div className="width-image-container">
+          <img src={width} />
+        </div>
+        <div className="measurement-inputs">
+          <div className="flex-row">
+            <label htmlFor="widthA">C(inch):</label>
+            <input
+              type="number"
+              id="widthA"
+              name="widthA"
+              placeholder="0"
+              value={data.widthA}
+              onChange={handleChange}
+              disabled={data.widthB !== "0" && data.widthB}
+            />
+            <select
+              name="fractionA"
+              value={data.fractionA}
+              onChange={handleChange}
+              disabled={data.widthB !== "0" && data.widthB}
+            >
+              <option value={0}>0</option>
+              <option value={0.125}>1/8</option>
+              <option value={0.25}>1/4</option>
+              <option value={0.375}>3/8</option>
+              <option value={0.5}>1/2</option>
+              <option value={0.625}>5/8</option>
+              <option value={0.75}>3/4</option>
+              <option value={0.875}>7/9</option>
+            </select>
+          </div>
+          <div className="flex-row">
+            <label htmlFor="widthB">D(inch):</label>
+            <input
+              type="number"
+              id="widthB"
+              name="widthB"
+              placeholder="0"
+              value={data.widthB}
+              onChange={handleChange}
+              disabled={data.widthA !== "0" && data.widthA}
+            />
+            <select
+              value={data.fractionB}
+              name="fractionB"
+              onChange={handleChange}
+              disabled={data.widthA !== "0" && data.widthA}
+            >
+              <option value={0}>0</option>
+              <option value={0.125}>1/8</option>
+              <option value={0.25}>1/4</option>
+              <option value={0.375}>3/8</option>
+              <option value={0.5}>1/2</option>
+              <option value={0.625}>5/8</option>
+              <option value={0.75}>3/4</option>
+              <option value={0.875}>7/9</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    );
 
-    return content
-}
-export default Width
+  const content = (
+    <>
+      <div className="container">
+        <button name="measureTypeWidth" value={"metric"} onClick={handleChange}>
+          Metric
+        </button>
+        <button
+          name="measureTypeWidth"
+          value={"imperial"}
+          onClick={handleChange}
+        >
+          Imperial
+        </button>
+
+        {form}
+      </div>
+    </>
+  );
+
+  return content;
+};
+export default Width;

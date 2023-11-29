@@ -5,7 +5,7 @@ const Height = () => {
   const { data, handleChange } = useFormContext();
 
   const form =
-    data.heightView === "metric" ? (
+    data.measureTypeHeight === "metric" ? (
       <div className="flex-col">
         <img className="height-image" src={height} />
         <div className="measurement-inputs">
@@ -51,8 +51,8 @@ const Height = () => {
               disabled={data.heightD !== "0" && data.heightD}
             />
             <select
-              name="heightCFraction"
-              value={data.heightCFraction}
+              name="fractionC"
+              value={data.fractionC}
               onChange={handleChange}
               disabled={data.heightD !== "0" && data.heightD}
             >
@@ -78,8 +78,8 @@ const Height = () => {
               disabled={data.heightC !== "0" && data.heightC}
             />
             <select
-              value={data.heightDFraction}
-              name="heightDFraction"
+              value={data.fractionD}
+              name="fractionD"
               onChange={handleChange}
               disabled={data.heightC !== "0" && data.heightC}
             >
@@ -100,10 +100,18 @@ const Height = () => {
   const content = (
     <>
       <div className="container">
-        <button name="heightView" value={"metric"} onClick={handleChange}>
+        <button
+          name="measureTypeHeight"
+          value={"metric"}
+          onClick={handleChange}
+        >
           Metric
         </button>
-        <button name="heightView" value={"imperial"} onClick={handleChange}>
+        <button
+          name="measureTypeHeight"
+          value={"imperial"}
+          onClick={handleChange}
+        >
           Imperial
         </button>
 
