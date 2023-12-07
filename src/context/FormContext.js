@@ -24,6 +24,7 @@ export const FormProvider = ({ children }) => {
 
   const [data, setData] = useState({
     customerName: "",
+    customerAddress: "",
     customerPhone: "",
     customerEmail: "",
     measureTypeWidth: "metric",

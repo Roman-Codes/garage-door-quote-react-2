@@ -73,6 +73,7 @@ let CADollar = new Intl.NumberFormat("en-CA", {
 export const generateQuote = (data) => {
   const {
     customerName,
+    customerAddress,
     customerPhone,
     customerEmail,
     measureTypeWidth,
@@ -240,7 +241,7 @@ export const generateQuote = (data) => {
   doc.text([customerName], 80, 10);
 
   doc.setFontSize(10);
-  doc.text([customerPhone, customerEmail], 80, 15);
+  doc.text([customerAddress, customerPhone, customerEmail], 80, 15);
 
   doc.setFontSize(12);
 
@@ -411,5 +412,11 @@ export const generateQuote = (data) => {
   doc.text("Approved for production:", 225, 189);
   doc.text("Sign: ________________", 225, 199);
 
-  doc.save(`${customerName.replace(" ", "_")}.pdf`);
+  doc.save(
+    `${(
+      customerName +
+      "_" +
+      customerAddress.replace(",", "").replace(" ", "_")
+    ).replace(" ", "_")}.pdf`
+  );
 };
