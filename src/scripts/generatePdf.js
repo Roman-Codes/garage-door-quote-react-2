@@ -129,20 +129,20 @@ export const generateQuote = (data) => {
     impComputedWidthB = convertToImperial(metricComputedWidthB);
   } else {
     impComputedWidthA = widthA
-      ? widthA + fractionA
+      ? parseInt(widthA) + parseFloat(fractionA)
       : (
           parseInt(widthB) +
-          parseInt(fractionB) -
+          parseFloat(fractionB) -
           2 * convertToImperial(guiderailMap[guiderail].value)
         ).toFixed(3);
 
     metricComputedWidthA = convertToMetric(impComputedWidthA);
 
     impComputedWidthB = widthB
-      ? widthB + fractionB
+      ? parseInt(widthB) + parseFloat(fractionB)
       : (
           parseInt(widthA) +
-          parseInt(fractionA) +
+          parseFloat(fractionA) +
           2 * convertToImperial(guiderailMap[guiderail].value)
         ).toFixed(3);
 
@@ -273,7 +273,7 @@ export const generateQuote = (data) => {
     50
   );
   doc.addImage(width, "PNG", 15, 60, 55, 28);
-  console.log(!!data.heightD);
+
   doc.setFontSize(14);
   doc.text("2. Height:", 15, 97);
   doc.setFontSize(12);
@@ -411,5 +411,5 @@ export const generateQuote = (data) => {
   doc.text("Approved for production:", 225, 189);
   doc.text("Sign: ________________", 225, 199);
 
-  doc.save("name.pdf");
+  doc.save(`${customerName.replace(" ", "_")}.pdf`);
 };

@@ -100,20 +100,26 @@ const Height = () => {
   const content = (
     <>
       <div className="container">
-        <button
-          name="measureTypeHeight"
-          value={"metric"}
-          onClick={handleChange}
-        >
-          Metric
-        </button>
-        <button
-          name="measureTypeHeight"
-          value={"imperial"}
-          onClick={handleChange}
-        >
-          Imperial
-        </button>
+        <div className="button-container">
+          <button
+            type="button"
+            className="button"
+            name="measureTypeHeight"
+            value={"metric"}
+            onClick={handleChange}
+          >
+            Metric
+          </button>
+          <button
+            type="button"
+            className="button"
+            name="measureTypeHeight"
+            value={"imperial"}
+            onClick={handleChange}
+          >
+            Imperial
+          </button>
+        </div>
 
         {form}
       </div>

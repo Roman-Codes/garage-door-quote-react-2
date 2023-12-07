@@ -155,7 +155,7 @@ export const FormProvider = ({ children }) => {
   const canNextPage13 = true;
 
   const disablePrev = page === 0;
-  // console.log(data)
+
   const disableNext =
     page === Object.keys(title).length - 1 ||
     (page === 0 && !canNextPage1) ||

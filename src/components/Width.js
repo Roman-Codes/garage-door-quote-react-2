@@ -12,7 +12,7 @@ const Width = () => {
         </div>
         <div className="measurement-inputs">
           <div className="flex-col">
-            <label htmlFor="widthA">C(mm):</label>
+            <label htmlFor="widthA">A(mm):</label>
             <input
               type="number"
               id="widthA"
@@ -24,7 +24,7 @@ const Width = () => {
             />
           </div>
           <div className="flex-col">
-            <label htmlFor="widthB">D(mm):</label>
+            <label htmlFor="widthB">B(mm):</label>
             <input
               type="number"
               id="widthB"
@@ -44,7 +44,7 @@ const Width = () => {
         </div>
         <div className="measurement-inputs">
           <div className="flex-row">
-            <label htmlFor="widthA">C(inch):</label>
+            <label htmlFor="widthA">A(inch):</label>
             <input
               type="number"
               id="widthA"
@@ -71,7 +71,7 @@ const Width = () => {
             </select>
           </div>
           <div className="flex-row">
-            <label htmlFor="widthB">D(inch):</label>
+            <label htmlFor="widthB">B(inch):</label>
             <input
               type="number"
               id="widthB"
@@ -104,16 +104,26 @@ const Width = () => {
   const content = (
     <>
       <div className="container">
-        <button name="measureTypeWidth" value={"metric"} onClick={handleChange}>
-          Metric
-        </button>
-        <button
-          name="measureTypeWidth"
-          value={"imperial"}
-          onClick={handleChange}
-        >
-          Imperial
-        </button>
+        <div className="button-container">
+          <button
+            type="button"
+            className="button"
+            name="measureTypeWidth"
+            value={"metric"}
+            onClick={handleChange}
+          >
+            Metric
+          </button>
+          <button
+            type="button"
+            className="button"
+            name="measureTypeWidth"
+            value={"imperial"}
+            onClick={handleChange}
+          >
+            Imperial
+          </button>
+        </div>
 
         {form}
       </div>
