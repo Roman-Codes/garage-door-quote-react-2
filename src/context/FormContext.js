@@ -58,7 +58,7 @@ export const FormProvider = ({ children }) => {
 
   const handleChange = (e) => {
     const type = e.target.type;
-    e.preventDefault();
+    e.target.type === "button" && e.preventDefault();
     const name = e.target.name;
 
     const id = e.target.id;

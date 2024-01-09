@@ -181,7 +181,7 @@ export const generateQuote = (data) => {
 
     impComputedHeightH = convertToImperial(metricComputedHeightH);
   } else {
-    impComputedHeightE = convertToImperial(constantHeightE);
+    impComputedHeightE = parseFloat(convertToImperial(constantHeightE));
     metricComputedHeightE = constantHeightE;
 
     impComputedHeightC = heightC
