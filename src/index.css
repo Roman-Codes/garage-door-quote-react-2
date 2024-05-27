@@ -184,6 +184,10 @@ label {
   transform: scale(0.7);
 }
 
+.guiderail-label {
+  width: 25%;
+}
+
 .guiderail-image {
   width: 50%;
 }

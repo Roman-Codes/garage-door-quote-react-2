@@ -1,6 +1,5 @@
 import jsPDF from "jspdf";
 import { formatDate } from "../utils/helpers";
-
 import {
   exit8,
   boxSize250,
@@ -37,10 +36,10 @@ const endslatMap = {
 };
 
 const guiderailMap = {
-  pp75: { img: pp_75, value: 75, namge: "PP75" },
-  pp66: { img: pp_66, value: 66, namge: "PP66" },
-  pp89: { img: pp_89, value: 89, namge: "PP89" },
-  pp110: { img: pp_110, value: 110, namge: "PP110" },
+  pp75: { img: pp_75, value: 75, name: "PP75" },
+  pp66: { img: pp_66, value: 66, name: "PP66" },
+  pp89: { img: pp_89, value: 89, name: "PP89" },
+  pp110: { img: pp_110, value: 110, name: "PP110" },
 };
 
 const boxSizeMap = {
@@ -49,28 +48,23 @@ const boxSizeMap = {
 };
 
 const exitPositionMap = {
-  exit1: exit1,
-  exit8: exit8,
+  exit1,
+  exit8,
 };
 
 const { TextField } = jsPDF.AcroForm;
 
-const convertToMetric = (inch) => {
-  const mm = parseFloat(inch) * 25.4;
-  return Math.floor(mm);
-};
+const convertToMetric = (inch) => Math.floor(parseFloat(inch) * 25.4);
 
-const convertToImperial = (mm) => {
-  const inch = parseInt(mm) / 25.4;
-  return parseFloat(inch).toFixed(3);
-};
+const convertToImperial = (mm) => (parseFloat(mm) / 25.4).toFixed(3);
 
-let CADollar = new Intl.NumberFormat("en-CA", {
-  style: "currency",
-  currency: "CAD",
-});
+const formatCurrency = (amount) =>
+  new Intl.NumberFormat("en-CA", {
+    style: "currency",
+    currency: "CAD",
+  }).format(amount);
 
-export const generateQuote = (data) => {
+const generateQuote = (data) => {
   const {
     customerName,
     customerAddress,
@@ -107,12 +101,10 @@ export const generateQuote = (data) => {
   const doc = new jsPDF("landscape");
 
   const constantHeightE = slatProfile === "slat55" ? 254 : 302;
-
   const constantHeightH = 105;
 
   let metricComputedWidthA;
   let metricComputedWidthB;
-
   let impComputedWidthA;
   let impComputedWidthB;
 
@@ -120,13 +112,11 @@ export const generateQuote = (data) => {
     metricComputedWidthA = widthA
       ? widthA
       : parseInt(widthB) - 2 * guiderailMap[guiderail].value;
-
     impComputedWidthA = convertToImperial(metricComputedWidthA);
 
     metricComputedWidthB = widthB
       ? widthB
       : parseInt(widthA) + 2 * guiderailMap[guiderail].value;
-
     impComputedWidthB = convertToImperial(metricComputedWidthB);
   } else {
     impComputedWidthA = widthA
@@ -136,7 +126,6 @@ export const generateQuote = (data) => {
           parseFloat(fractionB) -
           2 * convertToImperial(guiderailMap[guiderail].value)
         ).toFixed(3);
-
     metricComputedWidthA = convertToMetric(impComputedWidthA);
 
     impComputedWidthB = widthB
@@ -146,7 +135,6 @@ export const generateQuote = (data) => {
           parseFloat(fractionA) +
           2 * convertToImperial(guiderailMap[guiderail].value)
         ).toFixed(3);
-
     metricComputedWidthB = convertToMetric(impComputedWidthB);
   }
 
@@ -154,7 +142,6 @@ export const generateQuote = (data) => {
   let metricComputedHeightD;
   let metricComputedHeightE;
   let metricComputedHeightH;
-
   let impComputedHeightC;
   let impComputedHeightD;
   let impComputedHeightE;
@@ -164,21 +151,17 @@ export const generateQuote = (data) => {
     metricComputedHeightC = parseInt(
       heightC ? heightC : parseInt(heightD) + constantHeightE
     );
-
     impComputedHeightC = convertToImperial(metricComputedHeightC);
 
     metricComputedHeightD = parseInt(
       heightD ? heightD : parseInt(heightC) - constantHeightE
     );
-
     impComputedHeightD = convertToImperial(metricComputedHeightD);
 
     metricComputedHeightE = parseInt(constantHeightE);
-
     impComputedHeightE = convertToImperial(metricComputedHeightE);
 
     metricComputedHeightH = metricComputedHeightD - constantHeightH;
-
     impComputedHeightH = convertToImperial(metricComputedHeightH);
   } else {
     impComputedHeightE = parseFloat(convertToImperial(constantHeightE));
@@ -191,7 +174,6 @@ export const generateQuote = (data) => {
           parseFloat(fractionD) +
           impComputedHeightE
         ).toFixed(3);
-
     metricComputedHeightC = convertToMetric(impComputedHeightC);
 
     impComputedHeightD = heightD
@@ -201,20 +183,18 @@ export const generateQuote = (data) => {
           parseFloat(fractionC) -
           impComputedHeightE
         ).toFixed(3);
-
     metricComputedHeightD = convertToMetric(impComputedHeightD);
 
     impComputedHeightH =
       impComputedHeightD - parseFloat(convertToImperial(constantHeightH));
-
     metricComputedHeightH = convertToMetric(impComputedHeightH);
   }
 
-  //Border
+  // Border
   doc.setLineWidth(0.2);
   doc.rect(3, 3, 287, 200);
 
-  //Grid
+  // Grid
   doc.setLineWidth(0.5);
   doc.line(3, 35, 290, 35);
   doc.line(80, 35, 80, 181);
@@ -226,15 +206,12 @@ export const generateQuote = (data) => {
   doc.rect(3, 181, 147, 22);
   doc.line(3, 192, 150, 192);
 
-  //Logo
-
+  // Logo
   doc.addImage(logo, "PNG", 7, 7, 25, 20);
 
-  // //Attributes
+  // Attributes
   doc.setFontSize(16);
-
   doc.text("QUOTE FORM", 35, 15);
-
   doc.text(formatDate(new Date()), 35, 22);
 
   doc.setFontSize(12);
@@ -242,8 +219,6 @@ export const generateQuote = (data) => {
 
   doc.setFontSize(10);
   doc.text([customerAddress, customerPhone, customerEmail], 80, 15);
-
-  doc.setFontSize(12);
 
   doc.setFontSize(12);
   doc.text(
@@ -258,13 +233,11 @@ export const generateQuote = (data) => {
     10
   );
 
-  //Items
-  //Column 1
-
+  // Items
+  // Column 1
   doc.setFontSize(14);
   doc.text("1. Width:", 15, 45);
   doc.setFontSize(12);
-
   doc.text(
     [
       `A: ${metricComputedWidthA}mm (${impComputedWidthA})"`,
@@ -290,12 +263,11 @@ export const generateQuote = (data) => {
   );
   doc.addImage(height, "PNG", 15, 123, 55, 50);
 
-  //Column 2
-
+  // Column 2
   doc.setFontSize(14);
   doc.text("3. Operation:", 85, 45);
   doc.setFontSize(12);
-  var textField = new TextField();
+  const textField = new TextField();
   textField.Rect = [85, 46, 60, 10];
   textField.multiline = true;
   textField.value = "Electric Motor with Radio + MO (Lift Master).";
@@ -326,12 +298,12 @@ export const generateQuote = (data) => {
 
   doc.text(`6. Slat Profile: ${slatProfileMap[slatProfile].name}`, 85, 152);
   doc.addImage(slatProfileMap[slatProfile].image, "PNG", 98, 153, 27, 27);
-  //Column 3
 
+  // Column 3
   doc.text(`7. Endslat: ${endslatMap[endslat].name}`, 155, 45);
   doc.addImage(endslatMap[endslat].image, "PNG", 165, 47, 34, 34);
 
-  doc.text(`8. Guide Rail: ${"type"}`, 155, 85);
+  doc.text(`8. Guide Rail: ${guiderailMap[guiderail].name}`, 155, 85);
   doc.addImage(guiderailMap[guiderail].img, "PNG", 160, 86, 45, 20);
 
   doc.text(`9. Box Size: ${boxSizeMap[boxSize].name}`, 155, 110);
@@ -340,7 +312,7 @@ export const generateQuote = (data) => {
   doc.text(`10. Exit Strap/ Wire Position`, 155, 140);
   doc.addImage(exitPositionMap[exitStrap], "PNG", 165, 141, 33, 27);
 
-  //Column 4
+  // Column 4
   doc.text("11. Colors", 225, 45);
   doc.setFontSize(12);
   doc.text(
@@ -395,16 +367,15 @@ export const generateQuote = (data) => {
     167
   );
 
-  //Bottom
-
+  // Bottom
   doc.setFontSize(10);
   doc.text("Dealer Price (Tax, Shipping,duty not incl.)", 5, 189);
   doc.text("Qty.", 80, 189);
   doc.text("Total (Quote valid for 30 days)", 95, 189);
   doc.setFontSize(14);
-  doc.text(CADollar.format(productPrice), 35, 199);
+  doc.text(formatCurrency(productPrice), 35, 199);
   doc.text(productQuantity, 82, 199);
-  doc.text(CADollar.format(productPrice * productQuantity), 105, 199);
+  doc.text(formatCurrency(productPrice * productQuantity), 105, 199);
 
   doc.setFontSize(14);
   doc.text("Print:_________________", 155, 189);
@@ -416,7 +387,9 @@ export const generateQuote = (data) => {
     `${(
       customerName +
       "_" +
-      customerAddress.replace(",", "").replace(" ", "_")
-    ).replace(" ", "_")}.pdf`
+      customerAddress.replace(/,/g, "").replace(/ /g, "_")
+    ).replace(/ /g, "_")}.pdf`
   );
 };
+
+export { generateQuote };

@@ -4,47 +4,36 @@ import { pp_110, pp_75, pp_89 } from "../assets/images";
 const Guiderail = () => {
   const { data, handleChange } = useFormContext();
 
-  const content = (
-    <div className="flex-col">
-      <div className="radio-container guiderail-container">
-        <label htmlFor="pp75"> PP75</label>
-        <img className="guiderail-image" src={pp_75} />
-        <input
-          type="radio"
-          id="pp75"
-          name="guiderail"
-          value={data.guiderail}
-          onChange={handleChange}
-          checked={data.guiderail === "pp75"}
-        />
-      </div>
-      <div className="radio-container">
-        <label htmlFor="pp89">PP89</label>
-        <img className="guiderail-image" src={pp_89} />
-        <input
-          type="radio"
-          id="pp89"
-          name="guiderail"
-          value={data.guiderail}
-          onChange={handleChange}
-          checked={data.guiderail === "pp89"}
-        />
-      </div>
-      <div className="radio-container">
-        <label htmlFor="pp110">PP110</label>
-        <img className="guiderail-image" src={pp_110} />
-        <input
-          type="radio"
-          id="pp110"
-          name="guiderail"
-          value={data.guiderail}
-          onChange={handleChange}
-          checked={data.guiderail === "pp110"}
-        />
-      </div>
-    </div>
-  );
+  const guiderailOptions = [
+    { id: "pp66", label: "PP66", image: pp_75 },
+    { id: "pp75", label: "PP75", image: pp_75 },
+    { id: "pp89", label: "PP89", image: pp_89 },
+    { id: "pp110", label: "PP110", image: pp_110 },
+  ];
 
-  return content;
+  const renderGuiderailOptions = () =>
+    guiderailOptions.map((option) => (
+      <div key={option.id} className="radio-container guiderail-container">
+        <label className="guiderail-label" htmlFor={option.id}>
+          {option.label}
+        </label>
+        <img
+          className="guiderail-image"
+          src={option.image}
+          alt={option.label}
+        />
+        <input
+          type="radio"
+          id={option.id}
+          name="guiderail"
+          value={option.id}
+          onChange={handleChange}
+          checked={data.guiderail === option.id}
+        />
+      </div>
+    ));
+
+  return <div className="flex-col">{renderGuiderailOptions()}</div>;
 };
+
 export default Guiderail;
