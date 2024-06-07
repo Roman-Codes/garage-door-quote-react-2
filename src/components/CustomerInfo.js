@@ -5,7 +5,6 @@ const CustomerInfo = () => {
 
   const content = (
     <div className="flex-col">
-      {/* <div className="split-container"> */}
       <div className="flex-col">
         <label htmlFor="customerName">Customer Name</label>
         <input
@@ -13,7 +12,6 @@ const CustomerInfo = () => {
           id="customerName"
           name="customerName"
           placeholder="John Doe"
-          // pattern="([A-Z])[\w+.]{1,}"
           value={data.customerName}
           onChange={handleChange}
         />
@@ -36,7 +34,6 @@ const CustomerInfo = () => {
           id="customerPhone"
           name="customerPhone"
           placeholder="(123) 456-1122"
-          // pattern="([A-Z])[\w+.]{1,}"
           value={data.customerPhone}
           onChange={handleChange}
         />
@@ -48,7 +45,6 @@ const CustomerInfo = () => {
           id="customerEmail"
           name="customerEmail"
           placeholder="example@somewhere.com"
-          // pattern="([A-Z])[\w+.]{1,}"
           value={data.customerEmail}
           onChange={handleChange}
         />

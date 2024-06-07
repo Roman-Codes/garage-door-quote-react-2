@@ -1,5 +1,13 @@
 import jsPDF from "jspdf";
-import { formatDate } from "../utils/helpers";
+
+import {
+  formatDate,
+  convertToImperial,
+  convertToMetric,
+  formatCurrency,
+  camelToTitile,
+} from "../utils/helpers";
+
 import {
   exit8,
   boxSize250,
@@ -16,6 +24,8 @@ import {
   ldg_d,
   ldg_s,
   logo,
+  no,
+  spring,
   pa_55,
   pa_77,
   pp_66,
@@ -26,14 +36,22 @@ import {
 } from "../assets/images";
 
 const slatProfileMap = {
-  slat55: { image: pa_55, name: "PA55" },
-  slat77: { image: pa_77, name: "PA77" },
+  slat55: {
+    image: pa_55,
+    name: "PA55",
+    endslat: { image: ldg_s, name: "LDG-S" },
+  },
+  slat77: {
+    image: pa_77,
+    name: "PA77",
+    endslat: { image: ldg_d, name: "LDG-D" },
+  },
 };
 
-const endslatMap = {
-  ldgS: { image: ldg_s, name: "LDG-S" },
-  ldgD: { image: ldg_d, name: "LDG-D" },
-};
+// const endslatMap = {
+//   ldgS: { image: ldg_s, name: "LDG-S" },
+//   ldgD: { image: ldg_d, name: "LDG-D" },
+// };
 
 const guiderailMap = {
   pp75: { img: pp_75, value: 75, name: "PP75" },
@@ -50,19 +68,10 @@ const boxSizeMap = {
 const exitPositionMap = {
   exit1,
   exit8,
+  noExit: no,
 };
 
 const { TextField } = jsPDF.AcroForm;
-
-const convertToMetric = (inch) => Math.floor(parseFloat(inch) * 25.4);
-
-const convertToImperial = (mm) => (parseFloat(mm) / 25.4).toFixed(3);
-
-const formatCurrency = (amount) =>
-  new Intl.NumberFormat("en-CA", {
-    style: "currency",
-    currency: "CAD",
-  }).format(amount);
 
 const generateQuote = (data) => {
   const {
@@ -83,7 +92,11 @@ const generateQuote = (data) => {
     manualOverride,
     controlUnit,
     slatProfile,
-    endslat,
+    operation,
+    manualControlBox,
+    manualControlLock,
+    manualControlHandle,
+    // endslat,
     guiderail,
     boxSize,
     exitStrap,
@@ -91,6 +104,7 @@ const generateQuote = (data) => {
     colorEndslat,
     colorBox,
     colorRail,
+    colorMono,
     drillingLeft,
     drillingRight,
     extras,
@@ -101,7 +115,16 @@ const generateQuote = (data) => {
   const doc = new jsPDF("landscape");
 
   const constantHeightE = slatProfile === "slat55" ? 254 : 302;
-  const constantHeightH = 105;
+  const constantHeightH = slatProfile === "slat55" ? 64 : 102;
+
+  const isMotor = operation === "motor";
+  const isMonoColor = !!colorMono;
+
+  const manualControlText = () => {
+    doc.text(`Box:"${manualControlBox}`, 85, 130);
+    doc.text(`Handle:"${manualControlHandle}`, 85, 135);
+    doc.text(`Lock:"${manualControlLock}`, 85, 140);
+  };
 
   let metricComputedWidthA;
   let metricComputedWidthB;
@@ -267,13 +290,22 @@ const generateQuote = (data) => {
   doc.setFontSize(14);
   doc.text("3. Operation:", 85, 45);
   doc.setFontSize(12);
+
+  const operationText = isMotor
+    ? "Electric Motor with Radio + MO (Lift Master)."
+    : "Manual Spring";
+
+  const operationsImg = isMotor ? motor : spring;
+  const operatationIMGDimensions = isMotor
+    ? [85, 60, 55, 30]
+    : [100, 60, 30, 20];
   const textField = new TextField();
   textField.Rect = [85, 46, 60, 10];
   textField.multiline = true;
-  textField.value = "Electric Motor with Radio + MO (Lift Master).";
+  textField.value = operationText;
   textField.fieldName = "operationName";
   doc.addField(textField);
-  doc.addImage(motor, "JPEG", 85, 60, 55, 30);
+  doc.addImage(operationsImg, "JPEG", ...operatationIMGDimensions);
 
   doc.setFontSize(14);
   doc.text("4. Manual Override:", 85, 90);
@@ -287,21 +319,30 @@ const generateQuote = (data) => {
   );
 
   doc.text("5. Control Unit Side:", 85, 120);
-  doc.addImage(
-    controlUnit === "unitLeft" ? controlLeft : controlRight,
-    "JPEG",
-    97,
-    127,
-    27,
-    15
-  );
+  isMotor
+    ? doc.addImage(
+        controlUnit === "unitLeft" ? controlLeft : controlRight,
+        "JPEG",
+        97,
+        127,
+        27,
+        15
+      )
+    : manualControlText();
 
   doc.text(`6. Slat Profile: ${slatProfileMap[slatProfile].name}`, 85, 152);
   doc.addImage(slatProfileMap[slatProfile].image, "PNG", 98, 153, 27, 27);
 
   // Column 3
-  doc.text(`7. Endslat: ${endslatMap[endslat].name}`, 155, 45);
-  doc.addImage(endslatMap[endslat].image, "PNG", 165, 47, 34, 34);
+  doc.text(`7. Endslat: ${slatProfileMap[slatProfile].endslat.name}`, 155, 45);
+  doc.addImage(
+    slatProfileMap[slatProfile].endslat.image,
+    "PNG",
+    165,
+    47,
+    34,
+    34
+  );
 
   doc.text(`8. Guide Rail: ${guiderailMap[guiderail].name}`, 155, 85);
   doc.addImage(guiderailMap[guiderail].img, "PNG", 160, 86, 45, 20);
@@ -317,10 +358,10 @@ const generateQuote = (data) => {
   doc.setFontSize(12);
   doc.text(
     [
-      `Slat: ${colorSlat}`,
-      `Endslat: ${colorEndslat}`,
-      `Box: ${colorBox}`,
-      `Guide Rail: ${colorRail}`,
+      `Slat: ${camelToTitile(colorSlat)}`,
+      `Endslat: ${camelToTitile(colorEndslat)}`,
+      `Box: ${camelToTitile(colorBox)}`,
+      `Guide Rail: ${camelToTitile(colorRail)}`,
     ],
     225,
     50
