@@ -7,10 +7,11 @@ export const FormProvider = ({ children }) => {
     0: "Customer Info",
     1: "Width",
     2: "Height",
-    3: "Manual Override",
-    4: "Control Unit Side",
-    5: "Slat Profile",
-    6: "Endslat",
+    3: "Operation",
+    4: "Manual Override",
+    5: "Control Unit Side",
+    6: "Slat Profile",
+    // 7: "Endslat",
     7: "Guiderail",
     8: "Box Size",
     9: "Exit Strap",
@@ -21,6 +22,9 @@ export const FormProvider = ({ children }) => {
   };
 
   const [page, setPage] = useState(0);
+
+  const storedTemplate =
+    localStorage.getItem("template") && localStorage.getItem("template");
 
   const [data, setData] = useState({
     customerName: "",
@@ -38,20 +42,25 @@ export const FormProvider = ({ children }) => {
     heightD: "",
     fractionD: 0,
     constantHeight: 300,
+    operation: "",
     manualOverride: "",
     controlUnit: "",
+    manualControlBox: "",
+    manualControlHandle: "",
+    manualControlLock: "",
     slatProfile: "",
-    endslat: "",
     guiderail: "",
     boxSize: "",
     exitStrap: "",
+    typeColor: "mono",
+    monoColor: "",
     colorSlat: "",
     colorEndslat: "",
     colorBox: "",
     colorRail: "",
     drillingLeft: "",
     drillingRight: "",
-    extras: "",
+    extras: "SMC, Photo Sensors, LM850, LM891, LM885, Manual override",
     productPrice: "",
     productQuantity: "",
   });
@@ -62,13 +71,29 @@ export const FormProvider = ({ children }) => {
     const name = e.target.name;
 
     const id = e.target.id;
-
+    console.log(type);
     const value =
       type === "radio"
         ? id
         : type === "textarea"
-        ? e.target.value.split(", ")
+        ? e.target.value.split(",")
         : e.target.value;
+
+    if (data.operation === "motor") {
+      setData((prevData) => ({
+        ...prevData,
+        manualControlBox: "",
+        manualControlHandle: "",
+        manualControlLock: "",
+      }));
+    }
+
+    if (data.operation === "manual") {
+      setData((prevData) => ({
+        ...prevData,
+        controlUnit: "",
+      }));
+    }
 
     setData((prevData) => ({
       ...prevData,
@@ -86,6 +111,15 @@ export const FormProvider = ({ children }) => {
     fractionB,
     fractionC,
     fractionD,
+    manualControlBox,
+    manualControlHandle,
+    manualControlLock,
+    controlUnit,
+    monoColor,
+    colorSlat,
+    colorEndslat,
+    colorBox,
+    colorRail,
     ...requiredInputs
   } = data;
 
@@ -109,24 +143,34 @@ export const FormProvider = ({ children }) => {
     .some(Boolean);
 
   const canNextPage4 = Object.keys(data)
-    .filter((key) => key.startsWith("manual"))
+    .filter((key) => key.startsWith("operation"))
     .map((key) => data[key])
-    .every(Boolean);
+    .some(Boolean);
 
   const canNextPage5 = Object.keys(data)
-    .filter((key) => key.startsWith("control"))
+    .filter((key) => key.startsWith("manualOverride"))
     .map((key) => data[key])
     .every(Boolean);
 
-  const canNextPage6 = Object.keys(data)
+  const canNextPage6 =
+    Object.keys(data)
+      .filter((key) => key.startsWith("control"))
+      .map((key) => data[key])
+      .every(Boolean) ||
+    Object.keys(data)
+      .filter((key) => key.startsWith("manualControl"))
+      .map((key) => data[key])
+      .every(Boolean);
+
+  const canNextPage7 = Object.keys(data)
     .filter((key) => key.startsWith("slat"))
     .map((key) => data[key])
     .every(Boolean);
 
-  const canNextPage7 = Object.keys(data)
-    .filter((key) => key.startsWith("endslat"))
-    .map((key) => data[key])
-    .every(Boolean);
+  // const canNextPage8 = Object.keys(data)
+  //   .filter((key) => key.startsWith("endslat"))
+  //   .map((key) => data[key])
+  //   .every(Boolean);
 
   const canNextPage8 = Object.keys(data)
     .filter((key) => key.startsWith("guiderail"))
@@ -143,10 +187,15 @@ export const FormProvider = ({ children }) => {
     .map((key) => data[key])
     .every(Boolean);
 
-  const canNextPage11 = Object.keys(data)
-    .filter((key) => key.startsWith("color"))
-    .map((key) => data[key])
-    .every(Boolean);
+  const canNextPage11 =
+    Object.keys(data)
+      .filter((key) => key.startsWith("monoColor"))
+      .map((key) => data[key])
+      .some(Boolean) ||
+    Object.keys(data)
+      .filter((key) => key.startsWith("color"))
+      .map((key) => data[key])
+      .every(Boolean);
 
   const canNextPage12 = Object.keys(data)
     .filter((key) => key.startsWith("drilling"))

@@ -1,41 +1,88 @@
+import React from "react";
 import useFormContext from "../hooks/useFormContext";
 import { boxSize250, boxSize300 } from "../assets/images";
+
 const BoxSize = () => {
   const { data, handleChange } = useFormContext();
 
-  const content = (
+  const handleRadioChange = (event) => {
+    handleChange({ target: { name: "boxSize", value: event.target.value } });
+  };
+
+  return (
     <div className="flex-col">
       <div className="split-container">
-        <img className="form-image" src={boxSize250} />
-        <img className="form-image" src={boxSize300} />
-      </div>
-      <div className="split-container">
-        <div className="radio-container">
-          <label htmlFor="box250">250</label>
+        <label
+          htmlFor="box180"
+          className={`radio-label ${
+            data.boxSize === "box180" && "radio-label-selected"
+          }`}
+        >
+          <img className="form-image" src={boxSize250} alt="Box Size 180" />
+          <input
+            type="radio"
+            id="box180"
+            name="boxSize"
+            value="box180"
+            onChange={handleRadioChange}
+            checked={data.boxSize === "box180"}
+          />
+          180
+        </label>
+        <label
+          htmlFor="box250"
+          className={`radio-label ${
+            data.boxSize === "box250" && "radio-label-selected"
+          }`}
+        >
+          <img className="form-image" src={boxSize250} alt="Box Size 250" />
           <input
             type="radio"
             id="box250"
             name="boxSize"
-            value={data.boxSize}
-            onChange={handleChange}
+            value="box250"
+            onChange={handleRadioChange}
             checked={data.boxSize === "box250"}
           />
-        </div>
-        <div className="radio-container">
-          <label htmlFor="box300">300</label>
+          250
+        </label>
+        <label
+          htmlFor="box300"
+          className={`radio-label ${
+            data.boxSize === "box300" && "radio-label-selected"
+          }`}
+        >
+          <img className="form-image" src={boxSize300} alt="Box Size 300" />
           <input
             type="radio"
             id="box300"
             name="boxSize"
-            value={data.boxSize}
-            onChange={handleChange}
+            value="box300"
+            onChange={handleRadioChange}
             checked={data.boxSize === "box300"}
           />
-        </div>
+          300
+        </label>
+        <label
+          htmlFor="box350"
+          className={`radio-label ${
+            data.boxSize === "box350" && "radio-label-selected"
+          }`}
+        >
+          <img className="form-image" src={boxSize300} alt="Box Size 350" />
+          <input
+            type="radio"
+            id="box350"
+            name="boxSize"
+            value="box350"
+            onChange={handleRadioChange}
+            checked={data.boxSize === "box350"}
+          />
+          350
+        </label>
       </div>
     </div>
   );
-
-  return content;
 };
+
 export default BoxSize;

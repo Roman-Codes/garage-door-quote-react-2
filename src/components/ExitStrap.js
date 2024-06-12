@@ -1,17 +1,18 @@
 import useFormContext from "../hooks/useFormContext";
-import { exit1, exit8 } from "../assets/images";
+import { exit1, exit8, no } from "../assets/images";
 const ExitStrap = () => {
   const { data, handleChange } = useFormContext();
 
   const content = (
     <div className="flex-col">
       <div className="split-container">
-        <img className="form-image" src={exit1} />
-        <img className="form-image" src={exit8} />
-      </div>
-      <div className="split-container">
-        <div className="radio-container">
-          <label htmlFor="exit1">1</label>
+        <label
+          htmlFor="exit1"
+          className={`radio-label ${
+            data.exitStrap === "exit1" && "radio-label-selected"
+          }`}
+        >
+          <img className="form-image" src={exit1} />
           <input
             type="radio"
             id="exit1"
@@ -20,9 +21,15 @@ const ExitStrap = () => {
             onChange={handleChange}
             checked={data.exitStrap === "exit1"}
           />
-        </div>
-        <div className="radio-container">
-          <label htmlFor="exit8">8</label>
+          1
+        </label>
+        <label
+          htmlFor="exit8"
+          className={`radio-label ${
+            data.exitStrap === "exit8" && "radio-label-selected"
+          }`}
+        >
+          <img className="form-image" src={exit8} />
           <input
             type="radio"
             id="exit8"
@@ -31,7 +38,25 @@ const ExitStrap = () => {
             onChange={handleChange}
             checked={data.exitStrap === "exit8"}
           />
-        </div>
+          8
+        </label>
+        <label
+          htmlFor="noExit"
+          className={`radio-label ${
+            data.exitStrap === "noExit" && "radio-label-selected"
+          }`}
+        >
+          <img className="form-image" src={no} />
+          <input
+            type="radio"
+            id="noExit"
+            name="exitStrap"
+            value={data.exitStrap}
+            onChange={handleChange}
+            checked={data.exitStrap === "noExit"}
+          />
+          No Exit
+        </label>
       </div>
     </div>
   );

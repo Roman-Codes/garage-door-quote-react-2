@@ -6,13 +6,13 @@ const ManualOverride = () => {
   const content = (
     <div className="flex-col">
       <div className="split-container">
-        <img className="form-image" src={overrideFront} />
-
-        <img className="form-image" src={overrideBack} />
-      </div>
-      <div className="split-container">
-        <div className="radio-container">
-          <label htmlFor="overrideFront">Front</label>
+        <label
+          htmlFor="overrideFront"
+          className={`radio-label ${
+            data.manualOverride === "overrideFront" && "radio-label-selected"
+          }`}
+        >
+          <img className="form-image" src={overrideFront} />
           <input
             type="radio"
             id="overrideFront"
@@ -21,9 +21,15 @@ const ManualOverride = () => {
             onChange={handleChange}
             checked={data.manualOverride === "overrideFront"}
           />
-        </div>
-        <div className="radio-container">
-          <label htmlFor="overrideBack">Back</label>
+          Front
+        </label>
+        <label
+          htmlFor="overrideBack"
+          className={`radio-label ${
+            data.manualOverride === "overrideBack" && "radio-label-selected"
+          }`}
+        >
+          <img className="form-image" src={overrideBack} />
           <input
             type="radio"
             id="overrideBack"
@@ -32,7 +38,8 @@ const ManualOverride = () => {
             onChange={handleChange}
             checked={data.manualOverride === "overrideBack"}
           />
-        </div>
+          Back
+        </label>
       </div>
     </div>
   );

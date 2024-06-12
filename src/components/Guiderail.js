@@ -13,10 +13,13 @@ const Guiderail = () => {
 
   const renderGuiderailOptions = () =>
     guiderailOptions.map((option) => (
-      <div key={option.id} className="radio-container guiderail-container">
-        <label className="guiderail-label" htmlFor={option.id}>
-          {option.label}
-        </label>
+      <label
+        key={option.id}
+        className={`${
+          data.guiderail === option.id && "guiderail-label-selected"
+        } guiderail-label`}
+        htmlFor={option.id}
+      >
         <img
           className="guiderail-image"
           src={option.image}
@@ -30,7 +33,8 @@ const Guiderail = () => {
           onChange={handleChange}
           checked={data.guiderail === option.id}
         />
-      </div>
+        {option.label}
+      </label>
     ));
 
   return <div className="flex-col">{renderGuiderailOptions()}</div>;

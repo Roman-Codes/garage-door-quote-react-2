@@ -51,6 +51,21 @@ export const colorDropdown = (label, id, value, onChange) => {
   );
 };
 
+export const positionDropdown = (label, id, value, onChange) => {
+  return (
+    <label htmlFor={id}>
+      {label}:
+      <select id={id} name={id} value={value || "disabed"} onChange={onChange}>
+        <option value="disabed" defaultValue disabled>
+          Pick Position
+        </option>
+        <option value="inside">Inside</option>
+        <option value="outside">Outside</option>
+      </select>
+    </label>
+  );
+};
+
 export const formatDate = (date) => {
   var d = new Date(date),
     month = "" + (d.getMonth() + 1),
@@ -61,4 +76,20 @@ export const formatDate = (date) => {
   if (day.length < 2) day = "0" + day;
 
   return [day, month, year].join("/");
+};
+
+export const convertToMetric = (inch) => Math.floor(parseFloat(inch) * 25.4);
+
+export const convertToImperial = (mm) => (parseFloat(mm) / 25.4).toFixed(3);
+
+export const formatCurrency = (amount) =>
+  new Intl.NumberFormat("en-CA", {
+    style: "currency",
+    currency: "CAD",
+  }).format(amount);
+
+export const camelToTitile = (str) => {
+  const result = str.replace(/([A-Z])/g, " $1");
+  const finalResult = result.charAt(0).toUpperCase() + result.slice(1);
+  return finalResult;
 };

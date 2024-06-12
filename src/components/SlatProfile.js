@@ -7,12 +7,13 @@ const SlatProfile = () => {
   const content = (
     <div className="flex-col">
       <div className="split-container">
-        <img className="form-image" src={pa_55} />
-        <img className="form-image" src={pa_77} />
-      </div>
-      <div className="split-container">
-        <div className="radio-container">
-          <label htmlFor="slat55">55</label>
+        <label
+          htmlFor="slat55"
+          className={`radio-label ${
+            data.slatProfile === "slat55" && "radio-label-selected"
+          }`}
+        >
+          <img className="form-image" src={pa_55} />
           <input
             type="radio"
             id="slat55"
@@ -21,9 +22,15 @@ const SlatProfile = () => {
             onChange={handleChange}
             checked={data.slatProfile === "slat55"}
           />
-        </div>
-        <div className="radio-container">
-          <label htmlFor="slat77">77</label>
+          55
+        </label>
+        <label
+          htmlFor="slat77"
+          className={`radio-label ${
+            data.slatProfile === "slat77" && "radio-label-selected"
+          }`}
+        >
+          <img className="form-image" src={pa_77} />
           <input
             type="radio"
             id="slat77"
@@ -32,7 +39,8 @@ const SlatProfile = () => {
             onChange={handleChange}
             checked={data.slatProfile === "slat77"}
           />
-        </div>
+          77
+        </label>
       </div>
     </div>
   );
