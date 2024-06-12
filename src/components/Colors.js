@@ -1,15 +1,8 @@
-import { useState } from "react";
 import useFormContext from "../hooks/useFormContext";
 import { colorDropdown } from "../utils/helpers";
 
 const Colors = () => {
   const { data, handleChange } = useFormContext();
-  const [option, setOption] = useState("mono");
-
-  const handleClick = (e) => {
-    e.preventDefault();
-    setOption(e.target.value);
-  };
 
   const renderCustom = () => {
     return (
@@ -32,8 +25,8 @@ const Colors = () => {
       <>
         {colorDropdown(
           "Pick A Color",
-          "colorMono",
-          data.colorMono,
+          "monoColor",
+          data.monoColor,
           handleChange
         )}
       </>
@@ -42,15 +35,27 @@ const Colors = () => {
 
   const content = (
     <div className="flex-col">
-      <div>
-        <button value="mono" onClick={handleClick}>
+      <div className="button-container">
+        <button
+          type="button"
+          className="button"
+          name="typeColor"
+          value="mono"
+          onClick={handleChange}
+        >
           Monocolor
         </button>
-        <button value="custom" onClick={handleClick}>
+        <button
+          type="button"
+          className="button"
+          name="typeColor"
+          value="custom"
+          onClick={handleChange}
+        >
           Custom
         </button>
       </div>
-      {option === "custom" ? renderCustom() : renderMono()}
+      {data.typeColor === "custom" ? renderCustom() : renderMono()}
     </div>
   );
 

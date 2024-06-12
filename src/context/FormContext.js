@@ -23,6 +23,9 @@ export const FormProvider = ({ children }) => {
 
   const [page, setPage] = useState(0);
 
+  const storedTemplate =
+    localStorage.getItem("template") && localStorage.getItem("template");
+
   const [data, setData] = useState({
     customerName: "",
     customerAddress: "",
@@ -49,14 +52,15 @@ export const FormProvider = ({ children }) => {
     guiderail: "",
     boxSize: "",
     exitStrap: "",
-    colorMono: "",
+    typeColor: "mono",
+    monoColor: "",
     colorSlat: "",
     colorEndslat: "",
     colorBox: "",
     colorRail: "",
     drillingLeft: "",
     drillingRight: "",
-    extras: "",
+    extras: "SMC, Photo Sensors, LM850, LM891, LM885, Manual override",
     productPrice: "",
     productQuantity: "",
   });
@@ -67,12 +71,12 @@ export const FormProvider = ({ children }) => {
     const name = e.target.name;
 
     const id = e.target.id;
-
+    console.log(type);
     const value =
       type === "radio"
         ? id
         : type === "textarea"
-        ? e.target.value.split(", ")
+        ? e.target.value.split(",")
         : e.target.value;
 
     if (data.operation === "motor") {
@@ -111,7 +115,7 @@ export const FormProvider = ({ children }) => {
     manualControlHandle,
     manualControlLock,
     controlUnit,
-    colorMono,
+    monoColor,
     colorSlat,
     colorEndslat,
     colorBox,
@@ -185,7 +189,7 @@ export const FormProvider = ({ children }) => {
 
   const canNextPage11 =
     Object.keys(data)
-      .filter((key) => key.startsWith("colorMono"))
+      .filter((key) => key.startsWith("monoColor"))
       .map((key) => data[key])
       .some(Boolean) ||
     Object.keys(data)

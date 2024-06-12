@@ -12,6 +12,7 @@ import {
   exit8,
   boxSize250,
   boxSize300,
+  boxSize350,
   controlLeft,
   controlRight,
   drillingSide,
@@ -34,6 +35,7 @@ import {
   pp_110,
   width,
 } from "../assets/images";
+import { type } from "@testing-library/user-event/dist/type";
 
 const slatProfileMap = {
   slat55: {
@@ -63,6 +65,7 @@ const guiderailMap = {
 const boxSizeMap = {
   box250: { image: boxSize250, name: "SK250" },
   box300: { image: boxSize300, name: "SK300" },
+  box350: { image: boxSize350, name: "SK350" },
 };
 
 const exitPositionMap = {
@@ -104,7 +107,7 @@ const generateQuote = (data) => {
     colorEndslat,
     colorBox,
     colorRail,
-    colorMono,
+    monoColor,
     drillingLeft,
     drillingRight,
     extras,
@@ -118,7 +121,7 @@ const generateQuote = (data) => {
   const constantHeightH = slatProfile === "slat55" ? 64 : 102;
 
   const isMotor = operation === "motor";
-  const isMonoColor = !!colorMono;
+  const isMonoColor = !!monoColor;
 
   const manualControlText = () => {
     doc.text(`Box:"${manualControlBox}`, 85, 130);
@@ -358,10 +361,18 @@ const generateQuote = (data) => {
   doc.setFontSize(12);
   doc.text(
     [
-      `Slat: ${camelToTitile(colorSlat)}`,
-      `Endslat: ${camelToTitile(colorEndslat)}`,
-      `Box: ${camelToTitile(colorBox)}`,
-      `Guide Rail: ${camelToTitile(colorRail)}`,
+      `Slat: ${
+        isMonoColor ? camelToTitile(monoColor) : camelToTitile(colorSlat)
+      }`,
+      `Endslat: ${
+        isMonoColor ? camelToTitile(monoColor) : camelToTitile(colorEndslat)
+      }`,
+      `Box: ${
+        isMonoColor ? camelToTitile(monoColor) : camelToTitile(colorBox)
+      }`,
+      `Guide Rail: ${
+        isMonoColor ? camelToTitile(monoColor) : camelToTitile(colorRail)
+      }`,
     ],
     225,
     50
@@ -394,7 +405,13 @@ const generateQuote = (data) => {
   doc.text("Extras:", 225, 113);
   doc.setFontSize(10);
   doc.rect(225, 114, 60, 25);
-  doc.text(extras, 227, 117);
+  doc.text(
+    typeof extras === "string"
+      ? extras.split(",").map((el) => el.trim())
+      : extras,
+    227,
+    117
+  );
 
   doc.setFontSize(10);
   doc.text(

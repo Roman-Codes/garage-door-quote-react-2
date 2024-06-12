@@ -1,6 +1,7 @@
 export const exit8 = require("./exit8.png");
 export const boxSize250 = require("./boxSize250.png");
 export const boxSize300 = require("./boxSize300.png");
+export const boxSize350 = require("./boxSize350.png");
 export const controlLeft = require("./controlLeft.png");
 export const controlRight = require("./controlRight.png");
 export const drillingSide = require("./drillingSide.png");
