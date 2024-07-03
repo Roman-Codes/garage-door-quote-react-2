@@ -200,6 +200,12 @@ ul {
   box-shadow: 1px 1px 15px 5px rgba(0, 0, 0, 0.27);
 }
 
+.radio-label-disabled {
+  opacity: 0.4;
+  filter: alpha(opacity=40);
+  background-color: #000;
+}
+
 label:not(.radio-label) {
   margin: 5px 10px;
 }

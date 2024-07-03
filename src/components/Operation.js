@@ -9,7 +9,7 @@ const Operation = () => {
       <div className="split-container">
         <label
           htmlFor="motor"
-          className={`radio-label ${
+          className={`radio-label  ${
             data.operation === "motor" && "radio-label-selected"
           }`}
         >
@@ -20,8 +20,8 @@ const Operation = () => {
             id="motor"
             name="operation"
             value={data.operation}
-            onChange={handleChange}
             checked={data.operation === "motor"}
+            onChange={handleChange}
           />
         </label>
         <label
@@ -30,8 +30,8 @@ const Operation = () => {
             data.operation === "manual" && "radio-label-selected"
           }`}
         >
-          Manual Spring
           <img className="form-image" src={spring} />
+          Manual Spring
           <input
             type="radio"
             id="manual"

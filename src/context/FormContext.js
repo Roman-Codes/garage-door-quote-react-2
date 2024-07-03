@@ -69,9 +69,7 @@ export const FormProvider = ({ children }) => {
     const type = e.target.type;
     e.target.type === "button" && e.preventDefault();
     const name = e.target.name;
-
     const id = e.target.id;
-    console.log(type);
     const value =
       type === "radio"
         ? id
@@ -87,11 +85,12 @@ export const FormProvider = ({ children }) => {
         manualControlLock: "",
       }));
     }
-
+    //BIG BUG HERE
     if (data.operation === "manual") {
       setData((prevData) => ({
         ...prevData,
         controlUnit: "",
+        manualOverride: "overrideNone",
       }));
     }
 
@@ -147,10 +146,11 @@ export const FormProvider = ({ children }) => {
     .map((key) => data[key])
     .some(Boolean);
 
-  const canNextPage5 = Object.keys(data)
-    .filter((key) => key.startsWith("manualOverride"))
-    .map((key) => data[key])
-    .every(Boolean);
+  const canNextPage5 =
+    Object.keys(data)
+      .filter((key) => key.startsWith("manualOverride"))
+      .map((key) => data[key])
+      .every(Boolean) || data.operation === "manual";
 
   const canNextPage6 =
     Object.keys(data)
@@ -166,11 +166,6 @@ export const FormProvider = ({ children }) => {
     .filter((key) => key.startsWith("slat"))
     .map((key) => data[key])
     .every(Boolean);
-
-  // const canNextPage8 = Object.keys(data)
-  //   .filter((key) => key.startsWith("endslat"))
-  //   .map((key) => data[key])
-  //   .every(Boolean);
 
   const canNextPage8 = Object.keys(data)
     .filter((key) => key.startsWith("guiderail"))

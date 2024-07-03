@@ -63,6 +63,7 @@ const guiderailMap = {
 };
 
 const boxSizeMap = {
+  box180: { image: boxSize250, name: "SK180" },
   box250: { image: boxSize250, name: "SK250" },
   box300: { image: boxSize300, name: "SK300" },
   box350: { image: boxSize350, name: "SK350" },
@@ -72,6 +73,12 @@ const exitPositionMap = {
   exit1,
   exit8,
   noExit: no,
+};
+
+const overrideMap = {
+  overrideFront: { image: overrideFront, name: "Override Front" },
+  overrideBack: { image: overrideBack, name: "Override Back" },
+  overrideNone: { image: no, name: "No Override" },
 };
 
 const { TextField } = jsPDF.AcroForm;
@@ -99,7 +106,6 @@ const generateQuote = (data) => {
     manualControlBox,
     manualControlLock,
     manualControlHandle,
-    // endslat,
     guiderail,
     boxSize,
     exitStrap,
@@ -124,9 +130,9 @@ const generateQuote = (data) => {
   const isMonoColor = !!monoColor;
 
   const manualControlText = () => {
-    doc.text(`Box:"${manualControlBox}`, 85, 130);
-    doc.text(`Handle:"${manualControlHandle}`, 85, 135);
-    doc.text(`Lock:"${manualControlLock}`, 85, 140);
+    doc.text(`Box: ${manualControlBox}`, 85, 130);
+    doc.text(`Handle: ${manualControlHandle}`, 85, 135);
+    doc.text(`Lock: ${manualControlLock}`, 85, 140);
   };
 
   let metricComputedWidthA;
@@ -279,10 +285,10 @@ const generateQuote = (data) => {
   doc.setFontSize(12);
   doc.text(
     [
-      `C: ${metricComputedHeightC}mm (${impComputedHeightC})"`,
-      `D: ${metricComputedHeightD}mm (${impComputedHeightD})"`,
-      `E: ${metricComputedHeightE}mm (${impComputedHeightE})"`,
-      `H: ${metricComputedHeightH}mm (${impComputedHeightH})"`,
+      `C: ${metricComputedHeightC}mm (${impComputedHeightC}")`,
+      `D: ${metricComputedHeightD}mm (${impComputedHeightD}")`,
+      `E: ${metricComputedHeightE}mm (${impComputedHeightE}")`,
+      `H: ${metricComputedHeightH}mm (${impComputedHeightH}")`,
     ],
     15,
     102
@@ -311,15 +317,8 @@ const generateQuote = (data) => {
   doc.addImage(operationsImg, "JPEG", ...operatationIMGDimensions);
 
   doc.setFontSize(14);
-  doc.text("4. Manual Override:", 85, 90);
-  doc.addImage(
-    manualOverride === "overrideFront" ? overrideFront : overrideBack,
-    "PNG",
-    100,
-    95,
-    27,
-    20
-  );
+  doc.text(`4. ${overrideMap[manualOverride].name}:`, 85, 90);
+  doc.addImage(overrideMap[manualOverride].image, "PNG", 100, 95, 27, 20);
 
   doc.text("5. Control Unit Side:", 85, 120);
   isMotor
