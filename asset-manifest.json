@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/garage-door-quote-react-2/static/css/main.d07fcb11.css",
-    "main.js": "/garage-door-quote-react-2/static/js/main.4062ebca.js",
+    "main.css": "/garage-door-quote-react-2/static/css/main.39a82916.css",
+    "main.js": "/garage-door-quote-react-2/static/js/main.d4ccf283.js",
     "static/js/498.bbd91a2a.chunk.js": "/garage-door-quote-react-2/static/js/498.bbd91a2a.chunk.js",
     "static/js/703.016acebb.chunk.js": "/garage-door-quote-react-2/static/js/703.016acebb.chunk.js",
     "static/js/528.7deb2724.chunk.js": "/garage-door-quote-react-2/static/js/528.7deb2724.chunk.js",
@@ -27,14 +27,14 @@
     "static/media/controlRight.png": "/garage-door-quote-react-2/static/media/controlRight.c17c7f9a4f9964a7b376.png",
     "static/media/drillingSide.png": "/garage-door-quote-react-2/static/media/drillingSide.81a4e97d4e6af12e6c18.png",
     "index.html": "/garage-door-quote-react-2/index.html",
-    "main.d07fcb11.css.map": "/garage-door-quote-react-2/static/css/main.d07fcb11.css.map",
-    "main.4062ebca.js.map": "/garage-door-quote-react-2/static/js/main.4062ebca.js.map",
+    "main.39a82916.css.map": "/garage-door-quote-react-2/static/css/main.39a82916.css.map",
+    "main.d4ccf283.js.map": "/garage-door-quote-react-2/static/js/main.d4ccf283.js.map",
     "498.bbd91a2a.chunk.js.map": "/garage-door-quote-react-2/static/js/498.bbd91a2a.chunk.js.map",
     "703.016acebb.chunk.js.map": "/garage-door-quote-react-2/static/js/703.016acebb.chunk.js.map",
     "528.7deb2724.chunk.js.map": "/garage-door-quote-react-2/static/js/528.7deb2724.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.d07fcb11.css",
-    "static/js/main.4062ebca.js"
+    "static/css/main.39a82916.css",
+    "static/js/main.d4ccf283.js"
   ]
 }
