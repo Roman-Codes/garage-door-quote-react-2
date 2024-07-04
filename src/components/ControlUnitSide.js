@@ -7,14 +7,15 @@ const ControlUnitSide = () => {
 
   const renderContriolUnit = () => {
     return (
-      <div>
+      <div className="flex-col">
         <div className="split-container">
-          <img className="form-image" src={controlLeft} />
-          <img className="form-image" src={controlRight} />
-        </div>
-        <div className="split-container">
-          <div className="radio-container">
-            <label htmlFor="unitLeft">Left</label>
+          <label
+            className={`radio-label  ${
+              data.controlUnit === "unitLeft" && "radio-label-selected"
+            }`}
+            htmlFor="unitLeft"
+          >
+            <img className="form-image" src={controlLeft} />
             <input
               type="radio"
               id="unitLeft"
@@ -23,9 +24,15 @@ const ControlUnitSide = () => {
               onChange={handleChange}
               checked={data.controlUnit === "unitLeft"}
             />
-          </div>
-          <div className="radio-container">
-            <label htmlFor="unitRight">Right</label>
+            Left
+          </label>
+          <label
+            className={`radio-label  ${
+              data.controlUnit === "unitRight" && "radio-label-selected"
+            }`}
+            htmlFor="unitRight"
+          >
+            <img className="form-image" src={controlRight} />
             <input
               type="radio"
               id="unitRight"
@@ -34,7 +41,8 @@ const ControlUnitSide = () => {
               onChange={handleChange}
               checked={data.controlUnit === "unitRight"}
             />
-          </div>
+            Right
+          </label>
         </div>
       </div>
     );

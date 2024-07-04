@@ -54,7 +54,10 @@ const ManualOverride = () => {
         >
           <img className="form-image" src={overrideNone} />
           <input
-            checked={data.operation === "manual"}
+            checked={
+              data.operation === "manual" ||
+              data.manualOverride === "overrideNone"
+            }
             type="radio"
             id="overrideNone"
             name="manualOverride"

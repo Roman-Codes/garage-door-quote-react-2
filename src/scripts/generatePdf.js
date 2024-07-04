@@ -35,7 +35,6 @@ import {
   pp_110,
   width,
 } from "../assets/images";
-import { type } from "@testing-library/user-event/dist/type";
 
 const slatProfileMap = {
   slat55: {
@@ -63,10 +62,10 @@ const guiderailMap = {
 };
 
 const boxSizeMap = {
-  box180: { image: boxSize250, name: "SK180" },
-  box250: { image: boxSize250, name: "SK250" },
-  box300: { image: boxSize300, name: "SK300" },
-  box350: { image: boxSize350, name: "SK350" },
+  box180: { image: boxSize250, name: "SK180", dimension: 180 },
+  box250: { image: boxSize250, name: "SK250", dimension: 250 },
+  box300: { image: boxSize300, name: "SK300", dimension: 300 },
+  box350: { image: boxSize350, name: "SK350", dimension: 350 },
 };
 
 const exitPositionMap = {
@@ -123,7 +122,7 @@ const generateQuote = (data) => {
 
   const doc = new jsPDF("landscape");
 
-  const constantHeightE = slatProfile === "slat55" ? 254 : 302;
+  const constantHeightE = boxSizeMap[boxSize].dimension;
   const constantHeightH = slatProfile === "slat55" ? 64 : 102;
 
   const isMotor = operation === "motor";
@@ -404,12 +403,16 @@ const generateQuote = (data) => {
   doc.text("Extras:", 225, 113);
   doc.setFontSize(10);
   doc.rect(225, 114, 60, 25);
+
+  const splitExtrasText = doc.splitTextToSize(extras, 55);
+
   doc.text(
-    typeof extras === "string"
-      ? extras.split(",").map((el) => el.trim())
-      : extras,
+    // typeof extras === "string"
+    //   ? extras.split(",").map((el) => el.trim())
+    //   : extras,
+    splitExtrasText,
     227,
-    117
+    118
   );
 
   doc.setFontSize(10);
