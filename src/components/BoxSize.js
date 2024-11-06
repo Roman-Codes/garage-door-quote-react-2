@@ -1,6 +1,12 @@
 import React from "react";
 import useFormContext from "../hooks/useFormContext";
-import { boxSize250, boxSize300 } from "../assets/images";
+import {
+  boxSize250,
+  boxSize300,
+  boxSize350,
+  boxSize180,
+  boxSize205,
+} from "../assets/images";
 
 const BoxSize = () => {
   const { data, handleChange } = useFormContext();
@@ -18,7 +24,7 @@ const BoxSize = () => {
             data.boxSize === "box180" && "radio-label-selected"
           }`}
         >
-          <img className="form-image" src={boxSize250} alt="Box Size 180" />
+          <img className="form-image" src={boxSize180} alt="Box Size 180" />
           <input
             type="radio"
             id="box180"
@@ -28,6 +34,23 @@ const BoxSize = () => {
             checked={data.boxSize === "box180"}
           />
           180
+        </label>
+        <label
+          htmlFor="box205"
+          className={`radio-label ${
+            data.boxSize === "box205" && "radio-label-selected"
+          }`}
+        >
+          <img className="form-image" src={boxSize205} alt="Box Size 180" />
+          <input
+            type="radio"
+            id="box205"
+            name="boxSize"
+            value="box205"
+            onChange={handleRadioChange}
+            checked={data.boxSize === "box205"}
+          />
+          205
         </label>
         <label
           htmlFor="box250"
@@ -69,7 +92,7 @@ const BoxSize = () => {
             data.boxSize === "box350" && "radio-label-selected"
           }`}
         >
-          <img className="form-image" src={boxSize300} alt="Box Size 350" />
+          <img className="form-image" src={boxSize350} alt="Box Size 350" />
           <input
             type="radio"
             id="box350"

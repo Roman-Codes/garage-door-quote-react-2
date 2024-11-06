@@ -1,6 +1,6 @@
 import useFormContext from "../hooks/useFormContext";
 import { controlLeft, controlRight } from "../assets/images/";
-import { positionDropdown } from "../utils/helpers";
+import { positionDropdown, positionDropdownSide } from "../utils/helpers";
 
 const ControlUnitSide = () => {
   const { data, handleChange } = useFormContext();
@@ -50,25 +50,48 @@ const ControlUnitSide = () => {
 
   const renderManual = () => {
     return (
-      <div className="flex-col">
-        {positionDropdown(
-          "Box",
-          "manualControlBox",
-          data.manualControlBox,
-          handleChange
-        )}
-        {positionDropdown(
-          "Handle",
-          "manualControlHandle",
-          data.manualControlHandle,
-          handleChange
-        )}
-        {positionDropdown(
-          "Lock",
-          "manualControlLock",
-          data.manualControlLock,
-          handleChange
-        )}
+      <div className="split-container">
+        <div className="flex-col">
+          {positionDropdown(
+            "Box",
+            "manualControlBox",
+            data.manualControlBox,
+            handleChange
+          )}
+          {positionDropdown(
+            "Handle",
+            "manualControlHandle",
+            data.manualControlHandle,
+            handleChange
+          )}
+          {positionDropdown(
+            "Lock",
+            "manualControlLock",
+            data.manualControlLock,
+            handleChange
+          )}
+        </div>
+        <div className="flex-col">
+          {positionDropdownSide(
+            "Box",
+            "manualControlBoxSide",
+            data.manualControlBoxSide,
+            handleChange,
+            "sideA"
+          )}
+          {positionDropdownSide(
+            "Handle",
+            "manualControlHandleSide",
+            data.manualControlHandleSide,
+            handleChange
+          )}
+          {positionDropdownSide(
+            "Lock",
+            "manualControlLockSide",
+            data.manualControlLockSide,
+            handleChange
+          )}
+        </div>
       </div>
     );
   };

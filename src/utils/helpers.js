@@ -66,6 +66,48 @@ export const positionDropdown = (label, id, value, onChange) => {
   );
 };
 
+export const positionDropdownSide = (
+  label,
+  id,
+  value,
+  onChange,
+  selectedValue
+) => {
+  return (
+    <label htmlFor={id}>
+      {label}:
+      <select id={id} name={id} value={value || "disabed"} onChange={onChange}>
+        {!selectedValue && (
+          <option value="disabed" defaultValue disabled>
+            Pick Side
+          </option>
+        )}
+        <option
+          value="side A"
+          defaultValue={selectedValue === "sideA"}
+          disabled={selectedValue && selectedValue !== "sideA"}
+        >
+          Side A
+        </option>
+        <option
+          value="Side B"
+          defaultValue={selectedValue === "sideB"}
+          disabled={selectedValue && selectedValue !== "sideB"}
+        >
+          Side B
+        </option>
+        <option
+          value="Side A or B"
+          defaultValue={selectedValue === "sideAB"}
+          disabled={selectedValue && selectedValue !== "sideAB"}
+        >
+          Side A or B
+        </option>
+      </select>
+    </label>
+  );
+};
+
 export const formatDate = (date) => {
   var d = new Date(date),
     month = "" + (d.getMonth() + 1),

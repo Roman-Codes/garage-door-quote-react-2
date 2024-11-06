@@ -1,12 +1,16 @@
 export const exit8 = require("./exit8.png");
+export const boxSize180 = require("./boxSize180.jpg");
+export const boxSize205 = require("./boxSize205.jpg");
 export const boxSize250 = require("./boxSize250.png");
 export const boxSize300 = require("./boxSize300.png");
-export const boxSize350 = require("./boxSize350.png");
+export const boxSize350 = require("./boxSize350.jpg");
 export const controlLeft = require("./controlLeft.png");
 export const controlRight = require("./controlRight.png");
 export const drillingSide = require("./drillingSide.png");
 export const drillingTop = require("./drillingTop.png");
 export const exit1 = require("./exit1.png");
+export const exit2 = require("./exit2.jpg");
+export const exit9 = require("./exit9.jpg");
 export const height = require("./height.png");
 export const inde = require("./index.js");
 export const ldg_d = require("./ldg_d.png");

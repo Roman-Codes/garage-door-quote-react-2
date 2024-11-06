@@ -9,7 +9,8 @@ import {
 } from "../utils/helpers";
 
 import {
-  exit8,
+  boxSize180,
+  boxSize205,
   boxSize250,
   boxSize300,
   boxSize350,
@@ -20,6 +21,9 @@ import {
   overrideBack,
   overrideFront,
   exit1,
+  exit8,
+  exit2,
+  exit9,
   height,
   motor,
   ldg_d,
@@ -62,7 +66,8 @@ const guiderailMap = {
 };
 
 const boxSizeMap = {
-  box180: { image: boxSize250, name: "SK180", dimension: 180 },
+  box180: { image: boxSize180, name: "SK180", dimension: 180 },
+  box205: { image: boxSize205, name: "SK205", dimension: 205 },
   box250: { image: boxSize250, name: "SK250", dimension: 250 },
   box300: { image: boxSize300, name: "SK300", dimension: 300 },
   box350: { image: boxSize350, name: "SK350", dimension: 350 },
@@ -70,7 +75,9 @@ const boxSizeMap = {
 
 const exitPositionMap = {
   exit1,
+  exit2,
   exit8,
+  exit9,
   noExit: no,
 };
 
@@ -105,6 +112,9 @@ const generateQuote = (data) => {
     manualControlBox,
     manualControlLock,
     manualControlHandle,
+    manualControlBoxSide,
+    manualControlLockSide,
+    manualControlHandleSide,
     guiderail,
     boxSize,
     exitStrap,
@@ -129,9 +139,13 @@ const generateQuote = (data) => {
   const isMonoColor = !!monoColor;
 
   const manualControlText = () => {
-    doc.text(`Box: ${manualControlBox}`, 85, 130);
-    doc.text(`Handle: ${manualControlHandle}`, 85, 135);
-    doc.text(`Lock: ${manualControlLock}`, 85, 140);
+    doc.text(`Box: ${manualControlBox} - ${manualControlBoxSide}`, 85, 130);
+    doc.text(
+      `Handle: ${manualControlHandle} - ${manualControlHandleSide}`,
+      85,
+      135
+    );
+    doc.text(`Lock: ${manualControlLock} - ${manualControlLockSide}`, 85, 140);
   };
 
   let metricComputedWidthA;

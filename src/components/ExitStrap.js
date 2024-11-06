@@ -1,5 +1,5 @@
 import useFormContext from "../hooks/useFormContext";
-import { exit1, exit8, no } from "../assets/images";
+import { exit1, exit8, exit2, exit9, no } from "../assets/images";
 const ExitStrap = () => {
   const { data, handleChange } = useFormContext();
 
@@ -24,6 +24,23 @@ const ExitStrap = () => {
           1
         </label>
         <label
+          htmlFor="exit2"
+          className={`radio-label ${
+            data.exitStrap === "exit2" && "radio-label-selected"
+          }`}
+        >
+          <img className="form-image" src={exit2} />
+          <input
+            type="radio"
+            id="exit2"
+            name="exitStrap"
+            value={data.exitStrap}
+            onChange={handleChange}
+            checked={data.exitStrap === "exit2"}
+          />
+          2
+        </label>
+        <label
           htmlFor="exit8"
           className={`radio-label ${
             data.exitStrap === "exit8" && "radio-label-selected"
@@ -39,6 +56,23 @@ const ExitStrap = () => {
             checked={data.exitStrap === "exit8"}
           />
           8
+        </label>
+        <label
+          htmlFor="exit9"
+          className={`radio-label ${
+            data.exitStrap === "exit9" && "radio-label-selected"
+          }`}
+        >
+          <img className="form-image" src={exit9} />
+          <input
+            type="radio"
+            id="exit9"
+            name="exitStrap"
+            value={data.exitStrap}
+            onChange={handleChange}
+            checked={data.exitStrap === "exit9"}
+          />
+          Exit 9
         </label>
         <label
           htmlFor="noExit"
