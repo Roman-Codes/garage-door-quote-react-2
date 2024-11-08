@@ -127,7 +127,7 @@ export const FormProvider = ({ children }) => {
     colorRail,
     ...requiredInputs
   } = data;
-  console.log(requiredInputs);
+
   const canSubmit =
     [...Object.values(requiredInputs)].every(Boolean) &&
     page === Object.keys(title).length - 1;
