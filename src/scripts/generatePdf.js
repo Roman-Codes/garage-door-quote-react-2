@@ -1,5 +1,5 @@
 import jsPDF from "jspdf";
-
+import "jspdf-autotable";
 import {
   formatDate,
   convertToImperial,
@@ -53,11 +53,6 @@ const slatProfileMap = {
   },
 };
 
-// const endslatMap = {
-//   ldgS: { image: ldg_s, name: "LDG-S" },
-//   ldgD: { image: ldg_d, name: "LDG-D" },
-// };
-
 const guiderailMap = {
   pp75: { img: pp_75, value: 75, name: "PP75" },
   pp66: { img: pp_66, value: 66, name: "PP66" },
@@ -79,6 +74,11 @@ const exitPositionMap = {
   exit8,
   exit9,
   noExit: no,
+};
+
+const manualSpringMap = {
+  manualKey: "Manual Spring + Key",
+  manualBolt: "Manual Spring + Slidebolts",
 };
 
 const overrideMap = {
@@ -138,14 +138,40 @@ const generateQuote = (data) => {
   const isMotor = operation === "motor";
   const isMonoColor = !!monoColor;
 
-  const manualControlText = () => {
-    doc.text(`Box: ${manualControlBox} - ${manualControlBoxSide}`, 85, 130);
-    doc.text(
-      `Handle: ${manualControlHandle} - ${manualControlHandleSide}`,
-      85,
-      135
-    );
-    doc.text(`Lock: ${manualControlLock} - ${manualControlLockSide}`, 85, 140);
+  const generateTable = () => {
+    doc.rect(100, 128, 46, 18);
+    doc.line(100, 134, 146, 134);
+    doc.line(100, 140, 146, 140);
+    doc.line(123, 128, 123, 146);
+
+    doc.setFontSize(10);
+
+    doc.text("Client", 105, 126);
+    doc.text("Factory", 125, 126);
+
+    doc.text("Box", 86, 132);
+    doc.text("Handle", 86, 138);
+    doc.text("Lock", 86, 144);
+
+    doc.setFont("helvetica", "bold");
+
+    doc.text(manualControlBox.toUpperCase(), 102, 132);
+    doc.text(manualControlHandle.toUpperCase(), 102, 138);
+    doc.text(manualControlLock.toUpperCase(), 102, 144);
+
+    doc.text("SIDE", 125, 132);
+    doc.text("SIDE", 125, 138);
+    doc.text("SIDE", 125, 144);
+
+    doc.setTextColor(255, 0, 0);
+    doc.text(manualControlBoxSide.split(" ")[1], 134, 132);
+    doc.text(manualControlHandleSide.split(" ")[1], 134, 138);
+    doc.text(manualControlLockSide.split(" ")[1], 134, 144);
+
+    doc.setTextColor(0, 0, 0);
+    doc.setFont("helvetica", "normal");
+
+    doc.setFontSize(14);
   };
 
   let metricComputedWidthA;
@@ -315,9 +341,9 @@ const generateQuote = (data) => {
 
   const operationText = isMotor
     ? "Electric Motor with Radio + MO (Lift Master)."
-    : "Manual Spring";
+    : manualSpringMap[operation];
 
-  const operationsImg = isMotor ? motor : spring;
+  const operationsImg = isMotor && motor;
   const operatationIMGDimensions = isMotor
     ? [85, 60, 55, 30]
     : [100, 60, 30, 20];
@@ -327,7 +353,7 @@ const generateQuote = (data) => {
   textField.value = operationText;
   textField.fieldName = "operationName";
   doc.addField(textField);
-  doc.addImage(operationsImg, "JPEG", ...operatationIMGDimensions);
+  isMotor && doc.addImage(operationsImg, "JPEG", ...operatationIMGDimensions);
 
   doc.setFontSize(14);
   doc.text(`4. ${overrideMap[manualOverride].name}:`, 85, 90);
@@ -343,7 +369,7 @@ const generateQuote = (data) => {
         27,
         15
       )
-    : manualControlText();
+    : generateTable();
 
   doc.text(`6. Slat Profile: ${slatProfileMap[slatProfile].name}`, 85, 152);
   doc.addImage(slatProfileMap[slatProfile].image, "PNG", 98, 153, 27, 27);

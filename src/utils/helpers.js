@@ -96,13 +96,6 @@ export const positionDropdownSide = (
         >
           Side B
         </option>
-        <option
-          value="Side A or B"
-          defaultValue={selectedValue === "sideAB"}
-          disabled={selectedValue && selectedValue !== "sideAB"}
-        >
-          Side A or B
-        </option>
       </select>
     </label>
   );

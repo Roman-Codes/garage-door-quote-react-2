@@ -25,20 +25,37 @@ const Operation = () => {
           />
         </label>
         <label
-          htmlFor="manual"
+          htmlFor="manualKey"
           className={`radio-label ${
-            data.operation === "manual" && "radio-label-selected"
+            data.operation === "manualKey" && "radio-label-selected"
           }`}
         >
           <img className="form-image" src={spring} />
-          Manual Spring
+          Manual Spring + Key
           <input
             type="radio"
-            id="manual"
+            id="manualKey"
             name="operation"
             value={data.operation}
             onChange={handleChange}
-            checked={data.operation === "manual"}
+            checked={data.operation === "manualKey"}
+          />
+        </label>
+        <label
+          htmlFor="manualBolt"
+          className={`radio-label ${
+            data.operation === "manualBolt" && "radio-label-selected"
+          }`}
+        >
+          <img className="form-image" src={spring} />
+          Manual Spring + Slidebolts
+          <input
+            type="radio"
+            id="manualBolt"
+            name="operation"
+            value={data.operation}
+            onChange={handleChange}
+            checked={data.operation === "manualBolt"}
           />
         </label>
       </div>
