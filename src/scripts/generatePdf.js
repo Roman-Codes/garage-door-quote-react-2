@@ -26,6 +26,7 @@ import {
   exit9,
   height,
   motor,
+  ldg,
   ldg_d,
   ldg_s,
   logo,
@@ -46,7 +47,7 @@ const slatProfileMap = {
     image: pa_40,
     name: "PA40",
     //TODO: change endslat when know more about it
-    endslat: { image: ldg_s, name: "LDG-S" },
+    endslat: { image: ldg, name: "LDG" },
   },
   slat55: {
     image: pa_55,

@@ -13,6 +13,7 @@ export const exit2 = require("./exit2.jpg");
 export const exit9 = require("./exit9.jpg");
 export const height = require("./height.png");
 export const inde = require("./index.js");
+export const ldg = require("./ldg.png");
 export const ldg_d = require("./ldg_d.png");
 export const ldg_s = require("./ldg_s.png");
 export const logo = require("./logo.png");
