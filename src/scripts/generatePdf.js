@@ -368,11 +368,13 @@ const generateQuote = (data) => {
       10,
       172
     );
-  doc.text(
-    `D-Left: ${impComputedHeightDLeft}" D-Right: ${impComputedHeightDRight}"`,
-    10,
-    177
-  );
+  heightDLeft &&
+    heightDRight &&
+    doc.text(
+      `D-Left: ${impComputedHeightDLeft}" D-Right: ${impComputedHeightDRight}"`,
+      10,
+      177
+    );
 
   // Column 2
   doc.setFontSize(14);
