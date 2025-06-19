@@ -33,6 +33,30 @@ const Height = () => {
               disabled={data.heightC !== "0" && data.heightC}
             />
           </div>
+          <div className="flex-col">
+            <label htmlFor="heightLeft">D-Left(mm):</label>
+            <input
+              type="number"
+              id="heightDLeft"
+              name="heightDLeft"
+              placeholder="0"
+              value={data.heightDLeft}
+              onChange={handleChange}
+              // disabled={data.heightC !== "0" && data.heightC}
+            />
+          </div>
+          <div className="flex-col">
+            <label htmlFor="heightDRight">D-Right(mm):</label>
+            <input
+              type="number"
+              id="heightDRight"
+              name="heightDRight"
+              placeholder="0"
+              value={data.heightDRight}
+              onChange={handleChange}
+              // disabled={data.heightC !== "0" && data.heightC}
+            />
+          </div>
         </div>
       </div>
     ) : (
@@ -93,10 +117,64 @@ const Height = () => {
               <option value={0.875}>7/9</option>
             </select>
           </div>
+          <div className="flex-row">
+            <label htmlFor="heightDLeft">D-Left(inch):</label>
+            <input
+              type="number"
+              id="heightDLeft"
+              name="heightDLeft"
+              placeholder="0"
+              value={data.heightDLeft}
+              onChange={handleChange}
+              // disabled={data.heightC !== "0" && data.heightC}
+            />
+            <select
+              value={data.fractionDLeft}
+              name="fractionDLeft"
+              onChange={handleChange}
+              // disabled={data.heightC !== "0" && data.heightC}
+            >
+              <option value={0}>0</option>
+              <option value={0.125}>1/8</option>
+              <option value={0.25}>1/4</option>
+              <option value={0.375}>3/8</option>
+              <option value={0.5}>1/2</option>
+              <option value={0.625}>5/8</option>
+              <option value={0.75}>3/4</option>
+              <option value={0.875}>7/9</option>
+            </select>
+          </div>
+          <div className="flex-row">
+            <label htmlFor="heightDRight">D-Right(inch):</label>
+            <input
+              type="number"
+              id="heightDRight"
+              name="heightDRight"
+              placeholder="0"
+              value={data.heightDRight}
+              onChange={handleChange}
+              // disabled={data.heightC !== "0" && data.heightC}
+            />
+            <select
+              value={data.fractionDRight}
+              name="fractionDRight"
+              onChange={handleChange}
+              // disabled={data.heightC !== "0" && data.heightC}
+            >
+              <option value={0}>0</option>
+              <option value={0.125}>1/8</option>
+              <option value={0.25}>1/4</option>
+              <option value={0.375}>3/8</option>
+              <option value={0.5}>1/2</option>
+              <option value={0.625}>5/8</option>
+              <option value={0.75}>3/4</option>
+              <option value={0.875}>7/9</option>
+            </select>
+          </div>
         </div>
       </div>
     );
-//TODO: add D-left, D-right
+
   const content = (
     <>
       <div className="container">
