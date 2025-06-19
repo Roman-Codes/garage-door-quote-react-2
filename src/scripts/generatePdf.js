@@ -46,7 +46,6 @@ const slatProfileMap = {
   slat40: {
     image: pa_40,
     name: "PA40",
-    //TODO: change endslat when know more about it
     endslat: { image: ldg, name: "LDG" },
   },
   slat55: {
