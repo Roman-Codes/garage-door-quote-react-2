@@ -1,5 +1,5 @@
 import useFormContext from "../hooks/useFormContext";
-import { pa_55, pa_77 } from "../assets/images";
+import { pa_55, pa_77, pa_40 } from "../assets/images";
 
 const SlatProfile = () => {
   const { data, handleChange } = useFormContext();
@@ -8,13 +8,28 @@ const SlatProfile = () => {
     <div className="flex-col">
       <div className="split-container">
         <label
+          htmlFor="slat40"
+          className={`radio-label ${
+            data.slatProfile === "slat40" && "radio-label-selected"
+          }`}
+        >
+          <img className="form-image" src={pa_40} />
+          <input
+            type="radio"
+            id="slat40"
+            name="slatProfile"
+            value={data.slatProfile}
+            onChange={handleChange}
+            checked={data.slatProfile === "slat55"}
+          />
+          40
+        </label>
+        <label
           htmlFor="slat55"
           className={`radio-label ${
             data.slatProfile === "slat55" && "radio-label-selected"
           }`}
         >
-          //TODO: add slat 40mm
-          
           <img className="form-image" src={pa_55} />
           <input
             type="radio"

@@ -22,6 +22,7 @@ export const spring = require("./spring.png");
 export const pa_55 = require("./pa_55.png");
 export const overrideBack = require("./overrideBack.jpeg");
 export const overrideFront = require("./overrideFront.png");
+export const pa_40 = require("./pa_40.png");
 export const pa_77 = require("./pa_77.png");
 export const pp_66 = require("./pp_66.png");
 export const pp_75 = require("./pp_75.png");

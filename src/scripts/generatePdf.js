@@ -104,7 +104,11 @@ const generateQuote = (data) => {
     heightC,
     fractionC,
     heightD,
+    heightDLeft,
+    heightDRight,
     fractionD,
+    fractionDLeft,
+    fractionDRight,
     manualOverride,
     controlUnit,
     slatProfile,
@@ -212,10 +216,14 @@ const generateQuote = (data) => {
 
   let metricComputedHeightC;
   let metricComputedHeightD;
+  let metricComputedHeightDLeft;
+  let metricComputedHeightDRight;
   let metricComputedHeightE;
   let metricComputedHeightH;
   let impComputedHeightC;
   let impComputedHeightD;
+  let impComputedHeightDLeft;
+  let impComputedHeightDRight;
   let impComputedHeightE;
   let impComputedHeightH;
 
@@ -229,6 +237,14 @@ const generateQuote = (data) => {
       heightD ? heightD : parseInt(heightC) - constantHeightE
     );
     impComputedHeightD = convertToImperial(metricComputedHeightD);
+
+    metricComputedHeightDLeft = heightDLeft;
+    metricComputedHeightDRight = heightDRight;
+
+    impComputedHeightDLeft =
+      heightDLeft && parseFloat(convertToImperial(parseInt(heightDLeft)));
+    impComputedHeightDRight =
+      heightDRight && parseFloat(convertToImperial(parseInt(heightDRight)));
 
     metricComputedHeightE = parseInt(constantHeightE);
     impComputedHeightE = convertToImperial(metricComputedHeightE);
@@ -256,6 +272,16 @@ const generateQuote = (data) => {
           impComputedHeightE
         ).toFixed(3);
     metricComputedHeightD = convertToMetric(impComputedHeightD);
+
+    impComputedHeightDLeft = parseFloat(
+      convertToImperial(parseInt(heightDLeft) + parseFloat(fractionDLeft))
+    ).toFixed(3);
+    impComputedHeightDRight = parseFloat(
+      convertToImperial(parseInt(heightDRight) + parseFloat(fractionDRight))
+    ).toFixed(3);
+
+    metricComputedHeightDLeft = convertToMetric(impComputedHeightDLeft);
+    metricComputedHeightDRight = convertToMetric(impComputedHeightDRight);
 
     impComputedHeightH =
       impComputedHeightD - parseFloat(convertToImperial(constantHeightH));
@@ -333,7 +359,22 @@ const generateQuote = (data) => {
     15,
     102
   );
-  doc.addImage(height, "PNG", 15, 123, 55, 50);
+  doc.addImage(height, "PNG", 15, 120, 55, 47);
+
+  heightDLeft &&
+    heightDRight &&
+    doc.text(
+      `D-Left: ${metricComputedHeightDLeft}mm D-Right: ${metricComputedHeightDRight}mm`,
+      10,
+      172
+    );
+  heightDLeft &&
+    heightDRight &&
+    doc.text(
+      `D-Left: ${impComputedHeightDLeft}" D-Right: ${impComputedHeightDRight}"`,
+      10,
+      177
+    );
 
   // Column 2
   doc.setFontSize(14);
@@ -483,7 +524,7 @@ const generateQuote = (data) => {
   doc.text("Date:_________________", 155, 199);
   doc.text("Approved for production:", 225, 189);
   doc.text("Sign: ________________", 225, 199);
-
+  console.log(data);
   if (isPreview) return window.open(doc.output("bloburl"));
 
   doc.save(
