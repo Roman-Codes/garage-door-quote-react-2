@@ -20,7 +20,7 @@ const SlatProfile = () => {
             name="slatProfile"
             value={data.slatProfile}
             onChange={handleChange}
-            checked={data.slatProfile === "slat55"}
+            checked={data.slatProfile === "slat40"}
           />
           40
         </label>

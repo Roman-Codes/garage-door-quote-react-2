@@ -31,6 +31,7 @@ import {
   logo,
   no,
   spring,
+  pa_40,
   pa_55,
   pa_77,
   pp_66,
@@ -41,6 +42,12 @@ import {
 } from "../assets/images";
 
 const slatProfileMap = {
+  slat40: {
+    image: pa_40,
+    name: "PA40",
+    //TODO: change endslat when know more about it
+    endslat: { image: ldg_s, name: "LDG-S" },
+  },
   slat55: {
     image: pa_55,
     name: "PA55",
