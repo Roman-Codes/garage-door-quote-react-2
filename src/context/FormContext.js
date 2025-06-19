@@ -137,11 +137,10 @@ export const FormProvider = ({ children }) => {
     [...Object.values(requiredInputs)].every(Boolean) &&
     page === Object.keys(title).length - 1;
 
-  //TODO: remove email, phone number and address from required inputs
   const canNextPage1 = Object.keys(data)
     .filter((key) => key.startsWith("customer"))
     .map((key) => data[key])
-    .every(Boolean);
+    .every(Boolean) || (data.customerName && data.customerAddress);
 
   const canNextPage2 = Object.keys(data)
     .filter((key) => key.startsWith("width"))
