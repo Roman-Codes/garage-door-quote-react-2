@@ -140,7 +140,7 @@ export const FormProvider = ({ children }) => {
   const canNextPage1 = Object.keys(data)
     .filter((key) => key.startsWith("customer"))
     .map((key) => data[key])
-    .every(Boolean) || (data.customerEmail && data.customerAddress);
+    .every(Boolean) || (data.customerName && data.customerAddress);
 
   const canNextPage2 = Object.keys(data)
     .filter((key) => key.startsWith("width"))
