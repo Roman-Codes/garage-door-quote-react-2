@@ -13,6 +13,8 @@ const SlatProfile = () => {
             data.slatProfile === "slat55" && "radio-label-selected"
           }`}
         >
+          //TODO: add slat 40mm
+          
           <img className="form-image" src={pa_55} />
           <input
             type="radio"

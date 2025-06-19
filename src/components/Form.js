@@ -1,54 +1,83 @@
-import FormInputs from './FormInputs'
-import useFormContext from "../hooks/useFormContext"
-import {generateQuote} from "../scripts/generatePdf"
+import FormInputs from "./FormInputs";
+import useFormContext from "../hooks/useFormContext";
+import { generateQuote } from "../scripts/generatePdf";
 
 const Form = () => {
+  const {
+    page,
+    setPage,
+    data,
+    title,
+    canSubmit,
+    disablePrev,
+    disableNext,
+    prevHide,
+    nextHide,
+    previewHide,
+    submitHide,
+  } = useFormContext();
 
-    const {
-        page,
-        setPage,
-        data,
-        title,
-        canSubmit,
-        disablePrev,
-        disableNext,
-        prevHide,
-        nextHide,
-        submitHide
-    } = useFormContext()
+  const handlePrev = () => setPage((prev) => prev - 1);
 
-    const handlePrev = () => setPage(prev => prev - 1)
+  const handleNext = () => setPage((prev) => prev + 1);
 
-    const handleNext = () => setPage(prev => prev + 1)
+  const handlePreview = (e) => {
+    e.preventDefault();
+    generateQuote({ ...data, isPreview: true });
+  };
 
-    const handleSubmit = e => {
-        e.preventDefault();
-        generateQuote(data);
-    }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    generateQuote(data);
+  };
 
+  const content = (
+    <form className="form flex-col" onSubmit={handleSubmit}>
+      <header className="form-header">
+        <h2>{title[page]}</h2>
 
-    const content = (
-        <form className="form flex-col" onSubmit={handleSubmit}>
+        <div className="button-container">
+          <button
+            type="button"
+            className={`button ${prevHide}`}
+            onClick={handlePrev}
+            disabled={disablePrev}
+          >
+            Prev
+          </button>
 
-            <header className="form-header">
-                <h2>{title[page]}</h2>
+          <button
+            type="button"
+            className={`button ${nextHide}`}
+            onClick={handleNext}
+            disabled={disableNext}
+          >
+            Next
+          </button>
 
-                <div className="button-container">
+          <button
+            type="button"
+            className={`button ${previewHide}`}
+            onClick={handlePreview}
+            disabled={!canSubmit}
+          >
+            Preview
+          </button>
 
-                    <button type="button" className={`button ${prevHide}`} onClick={handlePrev} disabled={disablePrev}>Prev</button>
+          <button
+            type="submit"
+            className={`button ${submitHide}`}
+            disabled={!canSubmit}
+          >
+            Submit
+          </button>
+        </div>
+      </header>
 
-                    <button type="button" className={`button ${nextHide}`} onClick={handleNext} disabled={disableNext}>Next</button>
+      <FormInputs />
+    </form>
+  );
 
-                    <button type="submit" className={`button ${submitHide}`} disabled={!canSubmit}>Submit</button>
-                </div>
-            </header>
-
-
-            <FormInputs />
-
-        </form>
-    )
-
-    return content
-}
-export default Form
+  return content;
+};
+export default Form;

@@ -64,8 +64,8 @@ export const FormProvider = ({ children }) => {
     drillingLeft: "",
     drillingRight: "",
     extras: "SMC, Photo Sensors, LM850, LM891, LM885, Manual override",
-    productPrice: "",
-    productQuantity: "",
+    productPrice: "0",
+    productQuantity: "0",
   });
 
   const handleChange = (e) => {
@@ -125,6 +125,7 @@ export const FormProvider = ({ children }) => {
     colorEndslat,
     colorBox,
     colorRail,
+    isPreview,
     ...requiredInputs
   } = data;
 
@@ -132,6 +133,7 @@ export const FormProvider = ({ children }) => {
     [...Object.values(requiredInputs)].every(Boolean) &&
     page === Object.keys(title).length - 1;
 
+  //TODO: remove email, phone number and address from required inputs
   const canNextPage1 = Object.keys(data)
     .filter((key) => key.startsWith("customer"))
     .map((key) => data[key])
@@ -207,6 +209,8 @@ export const FormProvider = ({ children }) => {
 
   const disablePrev = page === 0;
 
+
+  //TODO: remove pagination add put everything on one page and add breadcrumbs fixed at the top
   const disableNext =
     page === Object.keys(title).length - 1 ||
     (page === 0 && !canNextPage1) ||
@@ -227,6 +231,8 @@ export const FormProvider = ({ children }) => {
 
   const nextHide = page === Object.keys(title).length - 1 && "remove-button";
 
+  const previewHide = page !== Object.keys(title).length - 1 && "remove-button";
+
   const submitHide = page !== Object.keys(title).length - 1 && "remove-button";
 
   return (
@@ -244,6 +250,7 @@ export const FormProvider = ({ children }) => {
         prevHide,
         nextHide,
         submitHide,
+        previewHide
       }}
     >
       {children}

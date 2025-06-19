@@ -128,6 +128,7 @@ const generateQuote = (data) => {
     extras,
     productPrice,
     productQuantity,
+    isPreview,
   } = data;
 
   const doc = new jsPDF("landscape");
@@ -454,10 +455,10 @@ const generateQuote = (data) => {
     227,
     118
   );
-
+  //TODO: look into increasing the text
   doc.setFontSize(10);
   doc.text(
-    "According to UL325, the opening \ndevice for residential garage doors \n must have infrared sensors and a \nreverse mechanism such as \nphotocells and SNMC controllers.",
+    "According to UL325, the opening \ndevice for residential garage doors \n must have infrared sensors and a \nreverse mechanism such as \nphotocells and SMC controllers.",
     225,
     145
   );
@@ -482,6 +483,8 @@ const generateQuote = (data) => {
   doc.text("Date:_________________", 155, 199);
   doc.text("Approved for production:", 225, 189);
   doc.text("Sign: ________________", 225, 199);
+
+  if (isPreview) return window.open(doc.output("bloburl"));
 
   doc.save(
     `${(
