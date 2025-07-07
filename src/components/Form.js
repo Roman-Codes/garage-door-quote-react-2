@@ -9,17 +9,17 @@ const Form = () => {
     data,
     title,
     canSubmit,
-    disablePrev,
-    disableNext,
-    prevHide,
-    nextHide,
+    // disablePrev,
+    // disableNext,
+    // prevHide,
+    // nextHide,
     previewHide,
     submitHide,
   } = useFormContext();
 
-  const handlePrev = () => setPage((prev) => prev - 1);
+  // const handlePrev = () => setPage((prev) => prev - 1);
 
-  const handleNext = () => setPage((prev) => prev + 1);
+  // const handleNext = () => setPage((prev) => prev + 1);
 
   const handlePreview = (e) => {
     e.preventDefault();
@@ -33,11 +33,12 @@ const Form = () => {
 
   const content = (
     <form className="form flex-col" onSubmit={handleSubmit}>
-      <header className="form-header">
+      <header className="form-header ">
         <h2>{title[page]}</h2>
 
-        <div className="button-container">
-          <button
+        <div className="fixed-top">
+          <div className="button-container ">
+            {/* <button
             type="button"
             className={`button ${prevHide}`}
             onClick={handlePrev}
@@ -53,28 +54,31 @@ const Form = () => {
             disabled={disableNext}
           >
             Next
-          </button>
-
-          <button
-            type="button"
-            className={`button ${previewHide}`}
-            onClick={handlePreview}
-            disabled={!canSubmit}
-          >
-            Preview
-          </button>
-
-          <button
-            type="submit"
-            className={`button ${submitHide}`}
-            disabled={!canSubmit}
-          >
-            Submit
-          </button>
+          </button> */}
+          </div>
         </div>
       </header>
 
       <FormInputs />
+
+      <button
+        type="button"
+        // className={`button ${previewHide}`}
+        className={`button `}
+        onClick={handlePreview}
+        disabled={!canSubmit}
+      >
+        Preview
+      </button>
+
+      <button
+        type="submit"
+        // className={`button ${submitHide}`}
+        className={`button `}
+        disabled={!canSubmit}
+      >
+        Submit
+      </button>
     </form>
   );
 

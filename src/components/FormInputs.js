@@ -18,25 +18,43 @@ import Price from "./Price";
 const FormInputs = () => {
   const { page } = useFormContext();
 
-  const display = {
-    0: <CustomerInfo />,
-    1: <Width />,
-    2: <Height />,
-    3: <Operation />,
-    4: <ManualOverride />,
-    5: <ControlUnitSide />,
-    6: <SlatProfile />,
-    // 7: <Endslat />,
-    7: <Guiderail />,
-    8: <BoxSize />,
-    9: <ExitStrap />,
-    10: <Colors />,
-    11: <Drilling />,
-    12: <Extras />,
-    13: <Price />,
-  };
+  // const display = {
+  //   0: <CustomerInfo />,
+  //   1: <Width />,
+  //   2: <Height />,
+  //   3: <Operation />,
+  //   4: <ManualOverride />,
+  //   5: <ControlUnitSide />,
+  //   6: <SlatProfile />,
+  //   // 7: <Endslat />,
+  //   7: <Guiderail />,
+  //   8: <BoxSize />,
+  //   9: <ExitStrap />,
+  //   10: <Colors />,
+  //   11: <Drilling />,
+  //   12: <Extras />,
+  //   13: <Price />,
+  // };
 
-  const content = <div className="form-inputs flex-col">{display[page]}</div>;
+  const display = [
+    <CustomerInfo />,
+    <Width />,
+    <Height />,
+    <Operation />,
+    <ManualOverride />,
+    <ControlUnitSide />,
+    <SlatProfile />,
+    // <Endslat />,
+    <Guiderail />,
+    <BoxSize />,
+    <ExitStrap />,
+    <Colors />,
+    <Drilling />,
+    <Extras />,
+    <Price />,
+  ];
+
+  const content = <div className="form-inputs flex-col">{display.map(input => <div className="form-input">{input}</div>)}</div>;
 
   return content;
 };

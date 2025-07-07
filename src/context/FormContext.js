@@ -133,14 +133,16 @@ export const FormProvider = ({ children }) => {
     ...requiredInputs
   } = data;
 
-  const canSubmit =
-    [...Object.values(requiredInputs)].every(Boolean) &&
-    page === Object.keys(title).length - 1;
+  const canSubmit = [...Object.values(requiredInputs)].every(Boolean);
 
-  const canNextPage1 = Object.keys(data)
-    .filter((key) => key.startsWith("customer"))
-    .map((key) => data[key])
-    .every(Boolean) || (data.customerName && data.customerAddress);
+  console.log("canSubmit", canSubmit);
+
+  const canNextPage1 =
+    Object.keys(data)
+      .filter((key) => key.startsWith("customer"))
+      .map((key) => data[key])
+      .every(Boolean) ||
+    (data.customerName && data.customerAddress);
 
   const canNextPage2 = Object.keys(data)
     .filter((key) => key.startsWith("width"))
@@ -212,7 +214,6 @@ export const FormProvider = ({ children }) => {
 
   const disablePrev = page === 0;
 
-
   //TODO: remove pagination add put everything on one page and add breadcrumbs fixed at the top
   const disableNext =
     page === Object.keys(title).length - 1 ||
@@ -253,7 +254,7 @@ export const FormProvider = ({ children }) => {
         prevHide,
         nextHide,
         submitHide,
-        previewHide
+        previewHide,
       }}
     >
       {children}
