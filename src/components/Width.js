@@ -67,7 +67,7 @@ const Width = () => {
               <option value={0.5}>1/2</option>
               <option value={0.625}>5/8</option>
               <option value={0.75}>3/4</option>
-              <option value={0.875}>7/9</option>
+              <option value={0.875}>7/8</option>
             </select>
           </div>
           <div className="flex-row">
@@ -94,7 +94,7 @@ const Width = () => {
               <option value={0.5}>1/2</option>
               <option value={0.625}>5/8</option>
               <option value={0.75}>3/4</option>
-              <option value={0.875}>7/9</option>
+              <option value={0.875}>7/8</option>
             </select>
           </div>
         </div>

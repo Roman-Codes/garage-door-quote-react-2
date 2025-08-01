@@ -281,10 +281,11 @@ const generateQuote = (data) => {
     metricComputedHeightD = convertToMetric(impComputedHeightD);
 
     impComputedHeightDLeft = parseFloat(
-      convertToImperial(parseInt(heightDLeft) + parseFloat(fractionDLeft))
+      parseInt(heightDLeft) + parseFloat(fractionDLeft)
     ).toFixed(3);
+
     impComputedHeightDRight = parseFloat(
-      convertToImperial(parseInt(heightDRight) + parseFloat(fractionDRight))
+      parseInt(heightDRight) + parseFloat(fractionDRight)
     ).toFixed(3);
 
     metricComputedHeightDLeft = convertToMetric(impComputedHeightDLeft);
