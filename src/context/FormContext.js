@@ -27,10 +27,10 @@ export const FormProvider = ({ children }) => {
     localStorage.getItem("template") && localStorage.getItem("template");
 
   const [data, setData] = useState({
-    customerName: "",
-    customerAddress: "",
-    customerPhone: "",
-    customerEmail: "",
+    customerName: " ",
+    customerAddress: " ",
+    customerPhone: " ",
+    customerEmail: " ",
     measureTypeWidth: "metric",
     widthA: "",
     fractionA: 0,
@@ -135,7 +135,7 @@ export const FormProvider = ({ children }) => {
 
   const canSubmit = [...Object.values(requiredInputs)].every(Boolean);
 
-  console.log("canSubmit", canSubmit);
+  console.log([...Object.values(requiredInputs)]);
 
   const canNextPage1 =
     Object.keys(data)
